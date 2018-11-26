@@ -1,9 +1,15 @@
 import java.util.LinkedList;
 
-public class Publisher implements IPrintable
+public class Publisher implements IPrintable, IWritable
 {
     /*Constructor*/
+    public Publisher() {
+        this.name = new String("");
+        titleList = new LinkedList<String>();
+    }
+    
     public Publisher(String name) {
+        this.name = new String("");
         this.name = name;
         titleList = new LinkedList<String>();
     }
@@ -76,5 +82,26 @@ public class Publisher implements IPrintable
         str += "\n----------\n";
 
         return str;
+    }
+
+    @Override
+    public String toData() {
+        String str = getName() + " ";
+        for (String s : titleList)
+        {
+            str += s + " ";
+        }
+        str += "xDATASEPARATEx";
+
+        return str;
+    }
+
+    @Override
+    public void getData(String[] str) {
+        setName(str[0]);
+        for (int i = 1; i < str.length; ++i)
+        {
+            titleList.add(str[i]);
+        }
     }
 }

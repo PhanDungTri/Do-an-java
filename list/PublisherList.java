@@ -4,11 +4,15 @@ public class PublisherList
 {
     /*Constructor*/
     PublisherList() {
+        path = ".\\data\\publisherlist.bin";
         list = new LinkedList<Publisher>();
+
+        FileIO.readFromFile(list, path, Publisher.class);
     }
     
     /*Members*/
-    LinkedList<Publisher> list;
+    private LinkedList<Publisher> list;
+    public String path;
 
     /*Get methods*/
     public Publisher getPublisher(String name) {
@@ -53,6 +57,8 @@ public class PublisherList
         }
 
         list.remove(index);
+        
+        FileIO.rewriteFile(list, path);
     }
 
     public int findPublisher(String name) { 
@@ -61,5 +67,33 @@ public class PublisherList
                 return list.indexOf(publisher);
         
         return -1;
+    }
+
+    public boolean checkPublisherList(Product product) {
+        String publisher = product.getPublisher();
+        if (findPublisher(publisher) == -1) 
+        {
+            System.out.println("This is new publisher! Adding to the list!");
+            addPublisher(publisher);
+            getPublisher(publisher).addTitle(product.getName());
+            FileIO.rewriteFile(list, path);
+            return true;
+        }
+        else
+        {
+            Publisher existPublisher = getPublisher(publisher);
+
+            if (existPublisher.findTitle(product.getName()) != -1)
+            {
+                System.out.println("This product is already exist! Re-check the ID!");
+                return false;
+            }
+            else
+            {
+                existPublisher.addTitle(product.getName());
+                FileIO.rewriteFile(list, path);
+                return true;
+            }
+        }
     }
 }

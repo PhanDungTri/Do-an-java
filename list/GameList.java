@@ -1,5 +1,4 @@
 import java.util.LinkedList;
-import java.io.IOException;
 
 public class GameList extends ProductList<Game>
 {

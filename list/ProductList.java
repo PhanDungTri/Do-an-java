@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.LinkedList;
 import java.lang.NoSuchMethodException;
 import java.lang.SecurityException;
@@ -140,6 +139,8 @@ public abstract class ProductList<T extends Product> implements IPrintable
                 index = findProduct(id);
             }
         }
+
+        FileIO.rewriteFile(list, path);
     }
 
     public int findProduct(String id) {

@@ -34,7 +34,7 @@ public class AddProductState implements State<Shop>
                 int quantity = Shop.scanner.nextInt();
                 Shop.scanner.nextLine();
                 owner.getGameList().addProduct(id, quantity, Game.class);
-                owner.getStateMachine().changeState(this);
+                enter(owner);;
                 break;
             }
             case 2:
@@ -46,11 +46,11 @@ public class AddProductState implements State<Shop>
                 int quantity = Shop.scanner.nextInt();
                 Shop.scanner.nextLine();
                 owner.getCardList().addProduct(id, quantity, Card.class);
-                owner.getStateMachine().changeState(this);
+                enter(owner);;
                 break;
             }
             case 3:
-                owner.getStateMachine().changeState(StaffMenuState.getInstance());;
+                owner.getStateMachine().pop();
                 break;
             default: 
                 System.out.print("Invalid option! Please input: ");

@@ -39,7 +39,7 @@ public class ViewListState implements State<Shop>
                 break;
             }
             case 3:
-                owner.getStateMachine().changeState(StaffMenuState.getInstance());
+                owner.getStateMachine().pop();
                 break;
             default:
                 System.out.print("Invalid option! Please input: ");

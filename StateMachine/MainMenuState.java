@@ -30,11 +30,11 @@ public class MainMenuState implements State<Shop>
             case 1:
                 break;
             case 2:
-                owner.getStateMachine().changeState(StaffMenuState.getInstance());
+                owner.getStateMachine().push(StaffMenuState.getInstance());
                 break;
             case 3:
                 System.out.println("\nGOODBYE!");
-                owner.exit();
+                owner.getStateMachine().pop();
                 break;
             default:
                 System.out.print("Invalid option! Please input: ");
@@ -43,7 +43,5 @@ public class MainMenuState implements State<Shop>
     }
 
     @Override
-    public void exit(Shop owner) {
-        owner.getStateMachine().setPreviousState(this);
-    }
+    public void exit(Shop owner) {}
 }

@@ -42,42 +42,46 @@ public class FileIO
 
     public static <T extends IWritable> void readFromFile(LinkedList<T> list, String path, Class<T> tclass)
     {
-        checkFileExist(path);
-        
-        try {
-            byte[] data = Files.readAllBytes(Paths.get(path));
-            String str = new String(data);
-            String[] info = str.split("xDATASEPARATEx");
-        
-            for (String s : info)
-            {
-                String[] details = s.split(" ");
-                try
-                {
-                    T object = (T)tclass.getDeclaredConstructor().newInstance();
-                    object.getData(details);
-                    list.add(object);
-                }
-                catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException |InvocationTargetException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void checkFileExist(String path) {
-        if (!Files.exists(Paths.get(path)))
+        if (checkFileExist(path))
         {
             try {
-                Files.createFile(Paths.get(path));
+                byte[] data = Files.readAllBytes(Paths.get(path));
+                String str = new String(data);
+                String[] info = str.split("xDATASEPARATEx");
+            
+                for (String s : info)
+                {
+                    String[] details = s.split(" ");
+                    try
+                    {
+                        T object = (T)tclass.getDeclaredConstructor().newInstance();
+                        object.getData(details);
+                        list.add(object);
+                    }
+                    catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException |InvocationTargetException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static boolean checkFileExist(String path) {
+        if (!Files.exists(Paths.get(path)))
+        {
+            try {
+                Files.createFile(Paths.get(path));
+                return false;
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return true;
     }
 }

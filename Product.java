@@ -96,8 +96,8 @@ public abstract class Product implements IPrintable, IWritable
 
     public String toData() {
         String str = getID() + " " 
-                   + getName() + " " 
-                   + getPublisher() + " " 
+                   + getName().replace(" ", "_") + " " 
+                   + getPublisher().replace(" ", "_") + " " 
                    + getPrice() + " ";
                    
         return str;
@@ -106,8 +106,8 @@ public abstract class Product implements IPrintable, IWritable
     @Override
     public void getData(String[] str) {
         setID(str[0]);
-        setName(str[1]);
-        setPublisher(str[2]);
+        setName(str[1].replace("_", " "));
+        setPublisher(str[2].replace("_", " ")); 
         setPrice(Integer.parseInt(str[3]));
     }
 }

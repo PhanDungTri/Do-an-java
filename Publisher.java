@@ -86,10 +86,10 @@ public class Publisher implements IPrintable, IWritable
 
     @Override
     public String toData() {
-        String str = getName() + " ";
+        String str = getName().replace(" ", "_") + " ";
         for (String s : titleList)
         {
-            str += s + " ";
+            str += s.replace(" ", "_") + " ";
         }
         str += "xDATASEPARATEx";
 
@@ -98,10 +98,10 @@ public class Publisher implements IPrintable, IWritable
 
     @Override
     public void getData(String[] str) {
-        setName(str[0]);
+        setName(str[0].replace("_", " "));
         for (int i = 1; i < str.length; ++i)
         {
-            titleList.add(str[i]);
+            titleList.add(str[i].replace("_", " "));
         }
     }
 }

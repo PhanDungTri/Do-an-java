@@ -10,9 +10,7 @@ public class Shop
         gameList = new GameList(publisherList);
         cardList = new CardList(publisherList);
         stateMachine = new StateMachine<Shop>(this);
-        stateMachine.setCurrentState(MainMenuState.getInstance());
-        stateMachine.changeState(MainMenuState.getInstance());
-        isExit = false;
+        stateMachine.push(MainMenuState.getInstance());
     }
     
     /*Members*/
@@ -20,7 +18,6 @@ public class Shop
     GameList gameList;
     CardList cardList;
     StateMachine<Shop> stateMachine;
-    boolean isExit;
 
     public static Scanner scanner = new Scanner(System.in);
 
@@ -38,16 +35,12 @@ public class Shop
         stateMachine.update();
     }
 
-    public void exit() { isExit = true; }
-
-    public boolean isExit() { return isExit; }
-
     /*Main method*/
     public static void main(String[] args)
     {
         Shop shop = new Shop();
 
-        while(!shop.isExit())
+        while(!shop.getStateMachine().isEmpty())
         {
             shop.update();
         }

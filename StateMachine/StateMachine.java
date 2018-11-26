@@ -1,44 +1,48 @@
+import java.util.Stack;
+
 public class StateMachine<T>
 {
     /*Constructor*/
     public StateMachine(T owner) {
         this.owner = owner;
-        currentState = null;
-        previousState = null;
+        stateStack = new Stack<State<T>>();
     }
 
     /*Members*/
-    private State<T> currentState;
-    private State<T> previousState;
     private T owner;
+    private Stack<State<T>> stateStack;
 
     /*Get methods*/
-    public State<T> getCurrentState() { return currentState; }
-    public State<T> getPreviousState() { return previousState; }
 
     /*Set methods*/
-    public void setCurrentState(State<T> state) { currentState = state; }
-    public void setPreviousState(State<T> state) { previousState = state; }
 
     /*Other methods*/
-    public void update()
-    {
-        if (currentState != null)
-            currentState.execute(owner);
-    }
-
-    public void changeState(State<T> state) {
+    public void push(State<T> state) {
         if (state != null)
         {
-            currentState.exit(owner);
-            currentState = state;
-            currentState.enter(owner);
+            if (!stateStack.isEmpty())
+                stateStack.peek().exit(owner);
+            stateStack.push(state);
+            stateStack.peek().enter(owner);
         }
         else
             System.out.println("Failed! Trying to change to a null state!");
     }
 
-    public void revertToPreviousState() {
-        changeState(previousState);
+    public void pop() {
+            stateStack.pop().exit(owner);
+
+            if (!stateStack.isEmpty())
+            stateStack.peek().enter(owner);
+    }
+
+    public void update()
+    {
+        if (!stateStack.isEmpty())
+            stateStack.peek().execute(owner);;
+    }
+
+    public boolean isEmpty() {
+        return stateStack.isEmpty();
     }
 }

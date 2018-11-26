@@ -29,17 +29,17 @@ public class RemoveProductState implements State<Shop>
             case 1:
             {
                 removeProduct(owner.getGameList());
-                owner.getStateMachine().changeState(this);
+                enter(owner);;
                 break;
             }
             case 2:
             {
                 removeProduct(owner.getCardList());
-                owner.getStateMachine().changeState(this);
+                enter(owner);;
                 break;
             }
             case 3:
-                owner.getStateMachine().changeState(StaffMenuState.getInstance());;
+                owner.getStateMachine().pop();
                 break;
             default: 
                 System.out.print("Invalid option! Please input: ");

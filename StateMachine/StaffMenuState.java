@@ -28,27 +28,29 @@ public class StaffMenuState implements State<Shop>
         switch(Shop.scanner.nextInt())
         {
             case 1:
-                owner.getStateMachine().changeState(AddProductState.getInstance());
+                owner.getStateMachine().push(AddProductState.getInstance());
                 break;
             case 2:
-                owner.getStateMachine().changeState(RemoveProductState.getInstance());
+                owner.getStateMachine().push(RemoveProductState.getInstance());
                 break;
             case 3:
-                owner.getStateMachine().changeState(ViewListState.getInstance());
+                owner.getStateMachine().push(ViewListState.getInstance());
                 break;
             case 4:
+                owner.getStateMachine().push(ViewPublisherState.getInstance());
                 break;
             case 5:
                 break;
             case 6:
                 break;
             case 7:
-                owner.getStateMachine().revertToPreviousState();;
+                owner.getStateMachine().pop();
                 break;
             default:
                 System.out.print("Invalid option! Please input: ");
                 break;
         }
+        Shop.scanner.nextLine();
     }
 
     @Override

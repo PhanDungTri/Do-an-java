@@ -140,6 +140,8 @@ public abstract class ProductList<T extends Product> implements IPrintable
                 index = findProduct(id);
             }
         }
+
+        FileIO.rewriteFile(list, path);
     }
 
     public int findProduct(String id) {

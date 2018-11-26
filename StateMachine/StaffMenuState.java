@@ -19,7 +19,7 @@ public class StaffMenuState implements State<Shop>
     /*Other methods*/
     @Override
     public void enter(Shop owner) {
-        System.out.print("\n=== Choose the option ===\n1. Add product\n2. Remove Product\n3. View list\n4. View Product" +
+        System.out.print("\n=== Choose the option ===\n1. Add product\n2. Remove Product\n3. View list\n4. View Publisher" +
                          "\n5. Get Quantity\n6. Get Total Quantity\n7. Logout\nInput: ");
     }
 

@@ -1,10 +1,18 @@
+import java.io.IOException;
 import java.util.LinkedList;
+import java.lang.NoSuchMethodException;
+import java.lang.SecurityException;
+import java.lang.InstantiationException;
+import java.lang.IllegalAccessException;
+import java.lang.IllegalArgumentException;
+import java.lang.reflect.InvocationTargetException;
 
 public abstract class ProductList<T extends Product> implements IPrintable
 {
     /*Member*/
     protected LinkedList<T> list;
     protected PublisherList publisherList;
+    public String path;
 
     /*Get methods*/
     public T getProduct(String id)
@@ -46,7 +54,53 @@ public abstract class ProductList<T extends Product> implements IPrintable
     /*Set methods*/
 
     /*Other methods*/
-    public abstract void addProduct(String id, int quantity);
+    public void addProduct(String id, int quantity, Class<T> tclass) {
+        int index = findProduct(id);
+        if (index == -1)
+        {
+            System.out.println("This is new ID!");
+            try
+            {
+                T newProduct = (T)tclass.getConstructor(String.class).newInstance(id);
+
+                if (!checkPublisherList(newProduct))
+                {
+                    System.out.println("Failed! Invalid information!");
+                    return;
+                }
+
+                list.add(newProduct);
+                FileIO.writeToFile(newProduct, path);
+                for (int i = 0; i < quantity - 1; ++i)
+                {
+                    T product = (T)tclass.getConstructor(tclass).newInstance(newProduct);
+                    list.add(product);
+                    FileIO.writeToFile(product, path);
+                }
+            }
+            catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException |InvocationTargetException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            T existProduct = getProduct(id);
+            for (int i = 0; i < quantity; ++i)
+            {
+                try
+                {
+                    T product = (T)tclass.getConstructor(tclass).newInstance(existProduct);
+                    list.add(product);
+                    FileIO.writeToFile(product, path);
+                }
+                catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException |InvocationTargetException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     public abstract String toString();
 
     public void removeProduct(String id, int quantity) {
@@ -67,6 +121,8 @@ public abstract class ProductList<T extends Product> implements IPrintable
                 index = findProduct(id);
             }
         }
+
+        FileIO.rewriteFile(list, path);
     }
 
     public void removeAllProduct(String id) {

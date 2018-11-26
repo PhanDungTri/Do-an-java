@@ -1,10 +1,21 @@
-public abstract class Product implements IPrintable
+public abstract class Product implements IPrintable, IWritable
 {
     /*Constructor*/
+    public Product(Product.Type type) {
+        this.id = new String("");
+        name = new String("");
+        code = new String("");
+        publisher = new String("");
+        
+        setType(type);
+    }
+
     public Product(String id, Product.Type type) { 
         this.id = new String("");
         name = new String("");
         code = new String("");
+        publisher = new String("");
+
         setID(id);
         setType(type);
         createProductInfo(); 
@@ -14,6 +25,7 @@ public abstract class Product implements IPrintable
         id = new String("");
         name = new String("");
         code = new String("");
+        publisher = new String("");
 
         setID(product.getID());
         setName(product.getName());
@@ -77,8 +89,25 @@ public abstract class Product implements IPrintable
 
     public String toString()
     {
-        String str = new String("");
-        str += String.format("|%-10s|%-20s|%-20s|%-5s|%-10s|", getID(), getName(), getPublisher(), getType().toString(), getPrice());
+        String str;
+        str = String.format("|%-10s|%-20s|%-20s|%-5s|%-10s|", getID(), getName(), getPublisher(), getType().toString(), getPrice());
         return str;
+    }
+
+    public String toData() {
+        String str = getID() + " " 
+                   + getName() + " " 
+                   + getPublisher() + " " 
+                   + getPrice() + " ";
+                   
+        return str;
+    }
+
+    @Override
+    public void getData(String[] str) {
+        setID(str[0]);
+        setName(str[1]);
+        setPublisher(str[2]);
+        setPrice(Integer.parseInt(str[3]));
     }
 }

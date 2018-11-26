@@ -1,8 +1,11 @@
+import java.nio.file.Paths;
 import java.util.Scanner;
+
 public class Shop
 {
     /*Constructor*/
-    public Shop() {
+    public Shop()
+    {
         publisherList = new PublisherList();
         gameList = new GameList(publisherList);
         cardList = new CardList(publisherList);
@@ -30,7 +33,8 @@ public class Shop
     /*Set methods*/
         
     /*Other methods*/
-    public void update() {
+    public void update()
+    {
         stateMachine.update();
     }
 
@@ -39,7 +43,8 @@ public class Shop
     public boolean isExit() { return isExit; }
 
     /*Main method*/
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Shop shop = new Shop();
 
         while(!shop.isExit())

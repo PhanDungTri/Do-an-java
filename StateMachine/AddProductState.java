@@ -1,6 +1,6 @@
 public class AddProductState implements State<Shop>
 {
-    /*Constructor*/
+    /*Constructor - Singleton pattern*/
     private AddProductState() {}
     /*Members*/
     private static AddProductState instance;

@@ -9,6 +9,7 @@ public class Shop
         publisherList = new PublisherList();
         gameList = new GameList(publisherList);
         cardList = new CardList(publisherList);
+        customerList = new CustomerList();
         stateMachine = new StateMachine<Shop>(this);
         stateMachine.push(MainMenuState.getInstance());
     }
@@ -17,6 +18,7 @@ public class Shop
     PublisherList publisherList;
     GameList gameList;
     CardList cardList;
+    CustomerList customerList;
     StateMachine<Shop> stateMachine;
 
     public static Scanner scanner = new Scanner(System.in);
@@ -25,6 +27,7 @@ public class Shop
     public GameList getGameList() { return gameList; }
     public CardList getCardList() { return cardList; }
     public PublisherList getPublisherList() { return publisherList; }
+    public CustomerList getCustomerList() { return customerList; }
     public StateMachine<Shop> getStateMachine() { return stateMachine; }
 
     /*Set methods*/

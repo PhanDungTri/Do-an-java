@@ -1,26 +1,25 @@
-public class MainMenuState implements State<Shop>
+public class CustomerMenuState implements State<Shop>
 {
     /*Constructor - Singleton*/
-    private MainMenuState() {}
-    
+    private CustomerMenuState() {}
+
     /*Members*/
-    private static MainMenuState instance;
+    private static CustomerMenuState instance;
 
     /*Get methods*/
-    public static MainMenuState getInstance() {
+    public static CustomerMenuState getInstance() {
         if (instance == null)
         {
-            instance = new MainMenuState();
+            instance = new CustomerMenuState();
         }
-
+        
         return instance;
     }
 
     /*Other methods*/
     @Override
     public void enter(Shop owner) {
-        System.out.print("\n+++++ WELCOME TO OUR SHOP +++++\n");
-        System.out.print("\n=== Choose the option ===\n1. Customer\n2. Staff\n3. Exit\nInput: ");
+        System.out.print("\n=== Choose the option ===\n1. Register\n2. Cancel\nInput: ");
     }
 
     @Override
@@ -28,19 +27,16 @@ public class MainMenuState implements State<Shop>
         switch(Shop.scanner.nextInt())
         {
             case 1:
-            owner.getStateMachine().push(CustomerMenuState.getInstance());
+                owner.getStateMachine().push(RegisterState.getInstance());
                 break;
             case 2:
-                owner.getStateMachine().push(StaffMenuState.getInstance());
-                break;
-            case 3:
-                System.out.println("\nGOODBYE!");
                 owner.getStateMachine().pop();
                 break;
             default:
                 System.out.print("Invalid option! Please input: ");
                 break;
         }
+        Shop.scanner.nextLine();
     }
 
     @Override

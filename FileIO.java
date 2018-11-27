@@ -12,6 +12,8 @@ import java.lang.reflect.InvocationTargetException;
 
 public class FileIO
 {
+    private FileIO() {}
+    
     public static <T extends IWritable> void writeToFile(T object, String path) {
         checkFileExist(path);
         String str = object.toData();

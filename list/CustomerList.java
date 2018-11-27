@@ -5,12 +5,13 @@ public class CustomerList {
   
     /* Members */
     protected LinkedList<Customer> list;
+    public String path;
 
     /* Constructor */
     public CustomerList() {
-    list = new LinkedList<Customer>();
+        path = ".\\data\\customerlist.bin";
+        list = new LinkedList<Customer>();
     }
- 
  
     /*Get Methods*/
     public Customer getCustomer(String id)
@@ -45,6 +46,7 @@ public class CustomerList {
             System.out.println("This is new customer's ID!");
             Customer customer= new Customer(id);
             list.add(customer);
+            FileIO.writeToFile(customer, path);
         }
         else
         {

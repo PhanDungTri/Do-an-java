@@ -1,5 +1,5 @@
 
-public class Customer implements IPrintable {
+public class Customer implements IPrintable, IWritable {
     /*Members*/
     private String id;
     private String lastName;
@@ -61,5 +61,30 @@ public class Customer implements IPrintable {
         setPhoneNumber(Shop.scanner.nextLine());
         
         setPoint(0);
+    }
+
+    @Override
+    public String toData() {
+        String str = getID() + " "
+                   + getFirstName().replace(" ", "_") + " "
+                   + getLastName().replace(" ", "_") + " "
+                   + getPhoneNumber() + " "
+                   + getYearOfBirth() + " " 
+                   + getAddress().replace(" ", "_") + " "
+                   + getPoint()
+                   + "xDATASEPARATEx";
+        
+        return str;
+    }
+
+    @Override
+    public void getData(String[] str) {
+        setID(str[0]);
+        setFirstName(str[1].replace("_", " "));
+        setLastName(str[2].replace("_", " "));
+        setPhoneNumber(str[3]);
+        setYearOfBirth(Integer.parseInt(str[4]));
+        setAddress(str[5].replace("_", " "));
+        setPoint(Integer.parseInt(str[6]));
     }
 }

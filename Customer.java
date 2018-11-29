@@ -39,7 +39,7 @@ public class Customer implements IPrintable, IWritable {
     public String toString()
     {
         String str = "";
-        str += String.format("|%-10s|%-20s|%-20s|%-15s|%-25s|%-15s|%-15s|%n", getID(), getFirstName(), getLastName(), getYearOfBirth(), getAddress(),getPhoneNumber(),getPoint());
+        str += String.format("|%-10s|%-15s|%-20s|%-5s|%-25s|%-15s|%-10s|%n", getID(), getFirstName(), getLastName(), getYearOfBirth(), getAddress(),getPhoneNumber(),getPoint());
         return str;
     }
 

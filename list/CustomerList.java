@@ -58,8 +58,8 @@ public class CustomerList {
     public String toString(){
         String str;
         str = "\n**Customer List**\n--------------------\n";
-        str += String.format("|%-10s|%-20s|%-20s|%-15s|%-25s|%-15s|%-15s|", 
-                             "ID", "First Name", "Last Name", "Year of birth", "Address", "Phone number", "Point");
+        str += String.format("|%-10s|%-15s|%-20s|%-5s|%-25s|%-15s|%-10s|", 
+                             "ID", "First Name", "Last Name", "Year", "Address", "Phone number", "Point");
         str += "\n--------------------\n"; 
         for (Customer customer : list)
         {

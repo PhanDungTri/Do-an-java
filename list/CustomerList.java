@@ -11,6 +11,7 @@ public class CustomerList {
     public CustomerList() {
         path = ".\\data\\customerlist.bin";
         list = new LinkedList<Customer>();
+        FileIO.readFromFile(list ,path, Customer.class);
     }
  
     /*Get Methods*/

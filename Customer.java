@@ -10,6 +10,7 @@ public class Customer implements IPrintable, IWritable {
     private int    point;
     
     /*Constructor*/
+    public Customer(){}
     public Customer(String id)
     {
         setID(id);

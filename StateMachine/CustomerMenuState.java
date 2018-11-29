@@ -32,8 +32,6 @@ public class CustomerMenuState implements State<Shop>
             case 2:
                 owner.getStateMachine().pop();
                 break;
-            case 3:
-                owner.getStateMachine().push(ViewListState.getInstance());
             default:
                 System.out.print("Invalid option! Please input: ");
                 break;

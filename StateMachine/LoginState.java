@@ -33,13 +33,13 @@ public class LoginState implements State<Shop>
         {
             if(owner.getStaffList().findStaff(input)!=-1)
                 {
-                    System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFistName() +" Has logged in\n");
+                    System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFistName() +" has logged in ! \n");
                     owner.getStateMachine().push(StaffMenuState.getInstance()); 
                 }
                
             else
                 {
-                 System.out.print("\nWrong staff's ID !!");
+                 System.out.print("\nWrong staff's ID !!\n");
                  enter(owner);
                 }
         }

@@ -10,6 +10,7 @@ public class Shop
         gameList = new GameList(publisherList);
         cardList = new CardList(publisherList);
         customerList = new CustomerList();
+        staffList = new StaffList();
         stateMachine = new StateMachine<Shop>(this);
         stateMachine.push(MainMenuState.getInstance());
     }
@@ -18,6 +19,7 @@ public class Shop
     PublisherList publisherList;
     GameList gameList;
     CardList cardList;
+    StaffList staffList;
     CustomerList customerList;
     StateMachine<Shop> stateMachine;
 
@@ -28,6 +30,7 @@ public class Shop
     public CardList getCardList() { return cardList; }
     public PublisherList getPublisherList() { return publisherList; }
     public CustomerList getCustomerList() { return customerList; }
+    public StaffList getStaffList()   { return staffList;}
     public StateMachine<Shop> getStateMachine() { return stateMachine; }
 
     /*Set methods*/

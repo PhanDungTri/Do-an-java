@@ -62,7 +62,7 @@ public class StaffList {
         String str;
         str = "\n**Staff List**\n--------------------\n";
         str += String.format("|%-10s|%-20s|%-20s|%-15s|%-25s|%-15s|%-15s|%-15s|%n",
-                                "ID","Last Name","Fist Name"," Year Of Birth" ,"Address","Phone Number","Mail","Salary");
+                                "ID","Last Name","First Name"," Year Of Birth" ,"Address","Phone Number","Mail","Salary");
         str += "\n--------------------\n";
         for (Staff staff : list)
         {

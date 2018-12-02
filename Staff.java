@@ -30,7 +30,7 @@ public class Staff implements IPrintable,IWritable {
     /*Get Methods*/
     public String getID() {return id ;}
     public String getLastName() {return lastName;}
-    public String getFistName() {return firstName;}
+    public String getFirstName() {return firstName;}
     public String getYearOfBirth() {return yearOfBirth;}
     public String getAddress() {return address;}
     public String getPhoneNumber() {return phoneNumber;}
@@ -40,7 +40,7 @@ public class Staff implements IPrintable,IWritable {
     public String toString ()
     {
         String str = "" ;
-        str += String.format("|%-10s|%-20s|%-20s|%-15s|%-25s|%-15s|%-15s|%-15s|%n",getID(),getLastName(),getFistName(),getYearOfBirth(),getAddress(),getPhoneNumber(),getMail(),getSalary());
+        str += String.format("|%-10s|%-20s|%-20s|%-15s|%-25s|%-15s|%-15s|%-15s|%n",getID(),getLastName(),getFirstName(),getYearOfBirth(),getAddress(),getPhoneNumber(),getMail(),getSalary());
         return str; 
     }
 
@@ -70,7 +70,7 @@ public class Staff implements IPrintable,IWritable {
     @Override 
     public String toData() {
         String str = getID() + " " 
-                   + getFistName().replace(" ", "_") + " "
+                   + getFirstName().replace(" ", "_") + " "
                    + getLastName().replace(" ", "_") + " "
                    + getYearOfBirth() + " "
                    + getAddress().replace(" ", "_") + " "

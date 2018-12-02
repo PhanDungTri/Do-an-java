@@ -33,7 +33,7 @@ public class LoginState implements State<Shop>
         {
             if(owner.getStaffList().findStaff(input)!=-1)
                 {
-                    System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFistName() +" has logged in ! \n");
+                    System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFirstName() +" has logged in ! \n");
                     owner.getStateMachine().pop(false);
                     owner.getStateMachine().push(StaffMenuState.getInstance()); 
                 }

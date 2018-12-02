@@ -17,6 +17,7 @@ public class Receipt implements IPrintable, IWritable {
         setCustomerID(customerID);
         setStaffID(staffID);
         createReceiptInfo();
+
     }
 
     
@@ -58,10 +59,8 @@ public class Receipt implements IPrintable, IWritable {
                    + getDate().replace(" ", "_") + " "
                    + getSumary()
                    + "xDATASEPARATEx";
-        
         return str;
     }
-
     @Override
     public void getData(String[] str) {
         setID(str[0]);

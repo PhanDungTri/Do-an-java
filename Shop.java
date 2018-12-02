@@ -11,6 +11,7 @@ public class Shop
         cardList = new CardList(publisherList);
         customerList = new CustomerList();
         staffList = new StaffList();
+        receiptList = new ReceiptList(customerList);
         stateMachine = new StateMachine<Shop>(this);
         stateMachine.push(MainMenuState.getInstance());
     }
@@ -21,6 +22,7 @@ public class Shop
     CardList cardList;
     StaffList staffList;
     CustomerList customerList;
+    ReceiptList receiptList;
     StateMachine<Shop> stateMachine;
 
     public static Scanner scanner = new Scanner(System.in);
@@ -31,6 +33,7 @@ public class Shop
     public PublisherList getPublisherList() { return publisherList; }
     public CustomerList getCustomerList() { return customerList; }
     public StaffList getStaffList()   { return staffList;}
+    public ReceiptList getReceiptList() {return receiptList; }
     public StateMachine<Shop> getStateMachine() { return stateMachine; }
 
     /*Set methods*/

@@ -19,7 +19,7 @@ public class ViewListState implements State<Shop>
     /*Other methods*/
     @Override
     public void enter(Shop owner) {
-        System.out.print("\n--Which type of list do you want to view?\n1. Game List\n2. Card List\n3. Customer List\n4. Cancel\nInput: ");
+        System.out.print("\n--Which type of list do you want to view?\n1. Game List\n2. Card List\n3. Customer List\n4. Receipt List \n Cancel\nInput: ");
     }
 
     @Override
@@ -45,6 +45,12 @@ public class ViewListState implements State<Shop>
                 break;
             }
             case 4:
+            {
+                System.out.print("\n" + owner.getReceiptList().toString());
+                enter(owner);
+                break;
+            }
+            case 5:
                 owner.getStateMachine().pop();
                 break;
             default:

@@ -25,26 +25,36 @@ public class FindProductState implements State<Shop>
     @Override
     public void execute(Shop owner) {
         ProductList list = null;
-        switch(Shop.scanner.nextInt())
+        int choose = 0;
+        while( (choose!=1) && (choose!=2) &&  (choose!=3) )
         {
-            case 1:
-                list = owner.getGameList();
-                break;
-            case 2:
-                list = owner.getCardList();
-                break;
-            case 3:
+            choose = Shop.scanner.nextInt();
+            switch(choose)
             {
-                owner.getStateMachine().pop();
-                Shop.scanner.nextLine();
-                return;
+                case 1:
+                  {
+                    list = owner.getGameList();
+                    break;
+                  } 
+                case 2:
+                {
+                    list = owner.getCardList();
+                    break;
+                }
+                case 3:
+                {
+                    owner.getStateMachine().pop();
+                    Shop.scanner.nextLine();
+                    return;
+                }
+                default:
+                {
+                    System.out.print("Invalid option! Please input: ");
+                    break; 
+                }            
             }
-            default:
-                System.out.print("Invalid option! Please input: ");
-                break;
         }
         Shop.scanner.nextLine();
-
         System.out.print("Input id: ");
         String input = Shop.scanner.nextLine();
         if (list.findProduct(input) == -1)
@@ -53,10 +63,12 @@ public class FindProductState implements State<Shop>
         }
         else
         {
+
             System.out.println(list.getProduct(input).toString());
         }
-        enter(owner);
     }
+
+    
 
     @Override
     public void exit(Shop owner) {}

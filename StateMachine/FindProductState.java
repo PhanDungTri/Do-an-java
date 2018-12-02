@@ -66,6 +66,7 @@ public class FindProductState implements State<Shop>
 
             System.out.println(list.getProduct(input).toString());
         }
+         enter(owner);
     }
 
     

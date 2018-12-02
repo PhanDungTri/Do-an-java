@@ -29,11 +29,15 @@ public class StateMachine<T>
             System.out.println("Failed! Trying to change to a null state!");
     }
 
-    public void pop() {
-            stateStack.pop().exit(owner);
+    public void pop(boolean skipEnter) {
+        stateStack.pop().exit(owner);
 
-            if (!stateStack.isEmpty())
-            stateStack.peek().enter(owner);
+        if (!stateStack.isEmpty() && skipEnter)
+        stateStack.peek().enter(owner);
+    }
+
+    public void pop() {
+        pop(true);
     }
 
     public void update()

@@ -6,13 +6,15 @@ public class ReceiptList {
     /* Members */
     private LinkedList<Receipt> list;
     private CustomerList customerList;
+    private StaffList staffList;
     public String path;
 
     /* Constructor */
-    public ReceiptList(CustomerList customerList) {
+    public ReceiptList(CustomerList customerList,StaffList staffList) {
         path = ".\\data\\Receiptlist.bin";
         list = new LinkedList<Receipt>();
         this.customerList= customerList;
+        this.staffList = staffList;
         FileIO.readFromFile(list ,path, Receipt.class);
     }
  
@@ -52,7 +54,7 @@ public class ReceiptList {
                 customerList.addCustomer(customerID);
             }
             System.out.println("This is new Receipt's ID!");
-            Receipt Receipt= new Receipt(id,staffID,customerID);
+            Receipt Receipt= new Receipt(id,staffID,customerID,staffList,customerList);
             list.add(Receipt);
             FileIO.writeToFile(Receipt, path);
         }

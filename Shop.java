@@ -11,7 +11,7 @@ public class Shop
         cardList = new CardList(publisherList);
         customerList = new CustomerList();
         staffList = new StaffList();
-        receiptList = new ReceiptList(customerList);
+        receiptList = new ReceiptList(customerList,staffList);
         stateMachine = new StateMachine<Shop>(this);
         stateMachine.push(MainMenuState.getInstance());
     }
@@ -46,7 +46,7 @@ public class Shop
 
     /*Main method*/
     public static void main(String[] args)
-    {
+    {   
         Shop shop = new Shop();
 
         while(!shop.getStateMachine().isEmpty())
@@ -56,4 +56,9 @@ public class Shop
 
         scanner.close();
     }
+    /*
+    CustomerList customerList = new CustomerList();
+    StaffList staffList = new StaffList();
+    ReceiptList reList = new ReceiptList(customerList,staffList);
+    reList.addReceipt("001","001","001"); */
 }

@@ -7,17 +7,18 @@ public class Receipt implements IPrintable, IWritable {
     private String staffID;
     private String date;
     private Double sumary;
-
+    private StaffList staffList;
+    private CustomerList customerList;
     
     /*Constructor*/
     public Receipt(){}
-    public Receipt(String id, String staffID, String customerID)
+    public Receipt(String id, String staffID, String customerID,StaffList staffList,CustomerList customerList)
     {   
         setID(id);
-        setCustomerID(customerID);
-        setStaffID(staffID);
+        setCustomerID(customerList.getCustomer(customerID).getFirstName());
+        setStaffID(staffList.getStaff(staffID).getFirstName());
         createReceiptInfo();
-
+        
     }
 
     

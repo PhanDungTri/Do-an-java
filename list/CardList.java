@@ -5,7 +5,7 @@ public class CardList extends ProductList<Card>
     /*Constructor*/
     public CardList(PublisherList publisherList)
     {
-        path = ".\\data\\cardlist.bin";
+        path = "./data/cardlist.bin";
 
         list = new LinkedList<Card>();
         this.publisherList = publisherList;

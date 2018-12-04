@@ -27,5 +27,15 @@ public class CardList extends ProductList<Card>
         }
 
         return str;
+    } 
+
+    public LinkedList<Card> findAllProductsByValue(int value) {
+        LinkedList<Card> foundList = new LinkedList<Card>();
+
+        for (Card product : list)
+            if (product.getValue() == value)
+                foundList.add(product);
+
+        return foundList;
     }
 }

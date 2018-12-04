@@ -28,4 +28,38 @@ public class GameList extends ProductList<Game>
 
         return str;
     }
+
+    public LinkedList<Game> findAllProductsByGenre(String name) {
+        LinkedList<Game> foundList = new LinkedList<Game>();
+        name = name.trim();
+        name = name.replace(" ", "_");
+
+        for (Game product : list)
+            if (product.getType().toString().equalsIgnoreCase(name))
+                foundList.add(product);
+
+        return foundList;
+    }
+
+    public LinkedList<Game> findAllProductsByYear(int year) {
+        LinkedList<Game> foundList = new LinkedList<Game>();
+
+        for (Game product : list)
+            if (product.getReleasedYear() == year)
+                foundList.add(product);
+
+        return foundList;
+    }
+
+    public LinkedList<Game> findAllProductsByPlatform(String name) {
+        LinkedList<Game> foundList = new LinkedList<Game>();
+        name = name.trim();
+        name = name.replace(".", "");
+
+        for (Game product : list)
+            if (product.getPlatform().toString().equalsIgnoreCase(name))
+                foundList.add(product);
+
+        return foundList;
+    }
 }

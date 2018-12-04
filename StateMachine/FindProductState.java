@@ -25,34 +25,30 @@ public class FindProductState implements State<Shop>
     @Override
     public void execute(Shop owner) {
         ProductList list = null;
-        int choose = 0;
-        while( (choose!=1) && (choose!=2) &&  (choose!=3) )
+        switch(Shop.scanner.nextInt())
         {
-            choose = Shop.scanner.nextInt();
-            switch(choose)
+            case 1:
             {
-                case 1:
-                  {
-                    list = owner.getGameList();
-                    break;
-                  } 
-                case 2:
-                {
-                    list = owner.getCardList();
-                    break;
-                }
-                case 3:
-                {
-                    owner.getStateMachine().pop();
-                    Shop.scanner.nextLine();
-                    return;
-                }
-                default:
-                {
-                    System.out.print("Invalid option! Please input: ");
-                    break; 
-                }            
+                list = owner.getGameList();
+                break;
+            } 
+            case 2:
+            {
+                list = owner.getCardList();
+                break;
             }
+            case 3:
+            {
+                owner.getStateMachine().pop();
+                Shop.scanner.nextLine();
+                return;
+            }
+            default:
+            {
+                System.out.print("Invalid option! Please input: ");
+                execute(owner);
+                return;
+            }            
         }
         Shop.scanner.nextLine();
         System.out.print("Input id: ");

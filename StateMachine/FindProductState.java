@@ -100,7 +100,7 @@ public class FindProductState implements State<Shop>
         switch (type) {
             case 1:
             {
-                System.out.print("\n-- Find by --\n1. Genre\n2. Platform\n3. Released Year\nInput: ");
+                System.out.print("\n-- Find by (Advanced) --\n1. Genre\n2. Platform\n3. Released Year\nInput: ");
                 LinkedList<Game> found = null;
                 int input;
                 do {
@@ -126,7 +126,7 @@ public class FindProductState implements State<Shop>
             }
 
             case 2: {
-                System.out.print("\n-- Find by --\n1. Value\nInput: ");
+                System.out.print("\n-- Find by (Advanced)--\n1. Value\nInput: ");
                 LinkedList<Card> found = null;
                 int input;
                 do {

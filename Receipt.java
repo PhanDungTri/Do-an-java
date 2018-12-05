@@ -1,5 +1,8 @@
 import java.util.Scanner;
+import java.util.Date;
 import java.lang.Double;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 public class Receipt implements IPrintable, IWritable {
     /*Members*/
     private String id;
@@ -46,8 +49,9 @@ public class Receipt implements IPrintable, IWritable {
 
     public void createReceiptInfo()
     {
-        System.out.print("Input Date (DD/MM/YYYY) : ");
-        setDate(Shop.scanner.nextLine());
+        //System.out.print("Input Date (DD/MM/YYYY) : ");
+        String date = new SimpleDateFormat("dd-MM-yy HH:mm:ss").format(new Date());
+        setDate(date);
         
         setSumary(0.0);
     }

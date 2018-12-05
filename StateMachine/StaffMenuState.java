@@ -20,7 +20,7 @@ public class StaffMenuState implements State<Shop>
     @Override
     public void enter(Shop owner) {
         System.out.print("\n=== Choose the option ===\n1. Add product\n2. Remove Product\n3. View list\n4. View Publisher" +
-                         "\n5. Get Quantity\n6. Find Product\n7. Logout\nInput: ");
+                         "\n5. Get Quantity\n6. Find Product\n7. Add receipt\n8. Logout\nInput: ");
     }
 
     @Override
@@ -45,7 +45,12 @@ public class StaffMenuState implements State<Shop>
             case 6:
                 owner.getStateMachine().push(FindProductState.getInstance());
                 break;
+            /*temp*/
             case 7:
+                owner.getReceiptList().addReceipt("002", "001", "001");
+                enter(owner);
+                break;
+            case 8:
                 owner.getStateMachine().pop();
                 break;
             default:

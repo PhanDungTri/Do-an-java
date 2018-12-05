@@ -4,13 +4,14 @@ import java.lang.Double;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class Receipt implements IPrintable, IWritable {
+public abstract class Receipt implements IPrintable, IWritable {
     /*Members*/
-    private String id;
+    protected String id;
     //private String customerID;
-    private String staffInfo;
-    private String date;
-    private Double sumary;
+    protected String staffInfo;
+    protected String date;
+    protected Double sumary;
+    protected int quantity;
     //private StaffList staffList;
     //private CustomerList customerList;
     
@@ -38,6 +39,8 @@ public class Receipt implements IPrintable, IWritable {
     public String getDate() { return date; }
     public Double getSumary() { return sumary; }
     
+    public abstract void writeReceipt(Product product);
+
     @Override
     public String toString()
     {
@@ -61,8 +64,7 @@ public class Receipt implements IPrintable, IWritable {
                    + getStaffInfo().replace(" ", "_") + " "
                    /*+ getCustomerID().replace(" ", "_") + " "*/
                    + getDate().replace(" ", "_") + " "
-                   + getSumary()
-                   + "xDATASEPARATEx";
+                   + getSumary() + " ";
         return str;
     }
     @Override

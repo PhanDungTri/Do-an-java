@@ -33,6 +33,19 @@ public class ReceiptList {
         }
     }
 
+    public Receipt getReceipt(int index)
+    {
+        if (index < 0 || index > getTotalQuantity())
+        {
+            System.out.println("Cannot find receipt!");
+            return null;
+        }
+        else
+        {
+            return list.get(index);
+        }
+    }
+
     public int getTotalQuantity() {
         return list.size();
     }

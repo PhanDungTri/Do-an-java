@@ -28,6 +28,17 @@ public abstract class ProductList<T extends Product> implements IPrintable
         }
     }
 
+    public T getProduct(int index) {
+        if (index >= list.size() || index < 0)
+        {
+            System.out.println("Cannot find ID!");
+            return null;
+        }
+        else {
+            return list.get(index);
+        }
+    }
+
     public int getTotalQuantity() {
         return list.size();
     }
@@ -100,6 +111,7 @@ public abstract class ProductList<T extends Product> implements IPrintable
             }
         }
     }
+
     public abstract String toString();
 
     public void removeProduct(String id, int quantity) {

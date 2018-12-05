@@ -1,9 +1,12 @@
+import java.util.LinkedList;
+
 public class AddProductState implements State<Shop>
 {
     /*Constructor - Singleton pattern*/
-    private AddProductState() {}
+    private AddProductState() { count = 0; }
     /*Members*/
     private static AddProductState instance;
+    private LinkedList<Integer> count;
 
     /*Get methods*/
     public static AddProductState getInstance() {
@@ -34,7 +37,11 @@ public class AddProductState implements State<Shop>
                 int quantity = Shop.scanner.nextInt();
                 Shop.scanner.nextLine();
                 owner.getGameList().addProduct(id, quantity, Game.class);
-                enter(owner);;
+                for (int i = 0; i < quantity; ++i)
+                {
+                    count.add(1);
+                }
+                enter(owner);
                 break;
             }
             case 2:
@@ -46,7 +53,11 @@ public class AddProductState implements State<Shop>
                 int quantity = Shop.scanner.nextInt();
                 Shop.scanner.nextLine();
                 owner.getCardList().addProduct(id, quantity, Card.class);
-                enter(owner);;
+                for (int i = 0; i < quantity; ++i)
+                {
+                    count.add(2);
+                }
+                enter(owner);
                 break;
             }
             case 3:
@@ -59,5 +70,17 @@ public class AddProductState implements State<Shop>
     }
     
     @Override
-    public void exit(Shop owner) {}
+    public void exit(Shop owner) {
+        GameList gameList = owner.getGameList();
+        CardList cardList = owner.getCardList();
+
+        int i = gameList.getTotalQuantity() - 1;
+        int j = cardList.getTotalQuantity() - 1;
+
+        for (int n : count) {
+            if (n == 1) {
+                
+            }
+        }
+    }
 }

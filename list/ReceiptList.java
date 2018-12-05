@@ -11,7 +11,7 @@ public class ReceiptList {
 
     /* Constructor */
     public ReceiptList(CustomerList customerList,StaffList staffList) {
-        path = ".\\data\\Receiptlist.bin";
+        path = "./data/Receiptlist.bin";
         list = new LinkedList<Receipt>();
         this.customerList= customerList;
         this.staffList = staffList;

@@ -5,7 +5,7 @@ public class GameList extends ProductList<Game>
     /*Constructor*/
     public GameList(PublisherList publisherList)
     {
-        path = ".\\data\\gamelist.bin";
+        path = "./data/gamelist.bin";
 
         list = new LinkedList<Game>();
         this.publisherList = publisherList;

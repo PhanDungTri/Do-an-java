@@ -4,7 +4,7 @@ public class PublisherList
 {
     /*Constructor*/
     PublisherList() {
-        path = ".\\data\\publisherlist.bin";
+        path = "./data/publisherlist.bin";
         list = new LinkedList<Publisher>();
 
         FileIO.readFromFile(list, path, Publisher.class);

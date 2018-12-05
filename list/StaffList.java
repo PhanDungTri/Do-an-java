@@ -9,7 +9,7 @@ public class StaffList {
 
     /* Constructor */
     public StaffList() {
-        path = ".\\data\\stafflist.bin";
+        path = "./data/stafflist.bin";
         list = new LinkedList<Staff>();
         FileIO.readFromFile(list, path, Staff.class);
     }

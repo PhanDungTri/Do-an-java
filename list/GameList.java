@@ -35,7 +35,7 @@ public class GameList extends ProductList<Game>
         name = name.replace(" ", "_");
 
         for (Game product : list)
-            if (product.getType().toString().equalsIgnoreCase(name))
+            if (product.getGenre().toString().equalsIgnoreCase(name))
                 foundList.add(product);
 
         return foundList;

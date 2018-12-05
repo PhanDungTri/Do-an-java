@@ -11,7 +11,7 @@ public class ReceiptList {
 
     /* Constructor */
     public ReceiptList(CustomerList customerList,StaffList staffList) {
-        path = "./data/Receiptlist.bin";
+        path = "./data/receiptlist.bin";
         list = new LinkedList<Receipt>();
         this.customerList= customerList;
         this.staffList = staffList;
@@ -44,24 +44,27 @@ public class ReceiptList {
         return -1;
     }
 
-    public void addReceipt(String id,String staffID,String customerID) {
-        int index = findReceipt(id);
-        if (index == -1)
+    public void addReceipt(String staffID/*,String customerID*/) {
+        /*if(customerList.findCustomer(customerID)==-1)
         {
-            if(customerList.findCustomer(customerID)==-1)
-            {
-                System.out.println("Not found Customer's ID. Please register before !");
-                customerList.addCustomer(customerID);
-            }
-            System.out.println("This is new Receipt's ID!");
-            Receipt Receipt= new Receipt(id,staffID,customerID,staffList,customerList);
-            list.add(Receipt);
-            FileIO.writeToFile(Receipt, path);
+            System.out.println("Not found Customer's ID. Please register before !");
+            customerList.addCustomer(customerID);
+        }*/
+        int id;
+        if (list.size() == 0)
+        {
+            id = 1;
         }
         else
         {
-           System.out.println("This Receipt was created");
+            id = Integer.parseInt(list.getLast().getID()) + 1;
         }
+        Receipt receipt= new Receipt(Integer.toString(id),staffID/*,customerID,staffList,customerList*/);
+        receipt.setStaffInfo(staffList.getStaff(staffID).getID() + " " 
+                             + staffList.getStaff(staffID).getFirstName() + " "
+                             + staffList.getStaff(staffID).getLastName());
+        list.add(receipt);
+        FileIO.writeToFile(receipt, path);
     }
     
 

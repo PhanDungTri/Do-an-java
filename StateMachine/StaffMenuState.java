@@ -47,7 +47,7 @@ public class StaffMenuState implements State<Shop>
                 break;
             /*temp*/
             case 7:
-                owner.getReceiptList().addReceipt("002", "001", "001");
+                owner.getReceiptList().addReceipt("001");
                 enter(owner);
                 break;
             case 8:

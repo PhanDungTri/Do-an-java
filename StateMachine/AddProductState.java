@@ -1,15 +1,20 @@
+import java.util.LinkedList;
+
 public class AddProductState implements State<Shop>
 {
     /*Constructor - Singleton pattern*/
     private AddProductState() {}
+
     /*Members*/
     private static AddProductState instance;
+    private static LinkedList<Integer> count;
 
     /*Get methods*/
     public static AddProductState getInstance() {
         if (instance == null)
         {
             instance = new AddProductState();
+            count = new LinkedList<Integer>();
         }
 
         return instance;
@@ -34,7 +39,10 @@ public class AddProductState implements State<Shop>
                 int quantity = Shop.scanner.nextInt();
                 Shop.scanner.nextLine();
                 owner.getGameList().addProduct(id, quantity, Game.class);
-                enter(owner);;
+                for (int i = 0; i < quantity; ++i) {
+                    count.add(1);
+                }
+                enter(owner);
                 break;
             }
             case 2:
@@ -46,6 +54,9 @@ public class AddProductState implements State<Shop>
                 int quantity = Shop.scanner.nextInt();
                 Shop.scanner.nextLine();
                 owner.getCardList().addProduct(id, quantity, Card.class);
+                for (int i = 0; i < quantity; ++i) {
+                    count.add(2);
+                }
                 enter(owner);;
                 break;
             }
@@ -59,5 +70,39 @@ public class AddProductState implements State<Shop>
     }
     
     @Override
-    public void exit(Shop owner) {}
+    public void exit(Shop owner) {
+        if (!count.isEmpty())
+        {
+            int id;
+            if (owner.getReceiptList().getQuantity() == 0) {
+                id = 1;
+            }
+            else {
+                id = owner.getReceiptList().getQuantity() + 1;
+            }
+
+            Receipt receipt = new Receipt(Integer.toString(id), owner.getStaffList().getStaff(LoginState.staffID).getLastName() + owner.getStaffList().getStaff(LoginState.staffID).getFistName(), Receipt.ReceiptType.Import);
+            GameList gameList = owner.getGameList();
+            CardList cardList = owner.getCardList();
+            ReceiptList receiptList = owner.getReceiptList();
+            receiptList.addReceipt(receipt);
+
+            int i = gameList.getTotalQuantity() - 1;
+            int j = cardList.getTotalQuantity() - 1;
+
+            for (int n : count) {
+                if (n == 1) {
+                    receiptList.writeReceipt(gameList.getProduct(i));
+                    --i;
+                }
+                else {
+                    receiptList.writeReceipt(cardList.getProduct(j));
+                    --j;
+                }
+            }
+            FileIO.writeToFile(receipt, receiptList.path);
+        }
+
+        count.clear();
+    }
 }

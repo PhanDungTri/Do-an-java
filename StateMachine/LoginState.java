@@ -5,6 +5,7 @@ public class LoginState implements State<Shop>
 
     /*Members*/
     private static LoginState instance;
+    public static String staffID;
 
     /*Get methods*/
     public static LoginState getInstance() {
@@ -31,18 +32,18 @@ public class LoginState implements State<Shop>
         }
         else
         {
-            if(owner.getStaffList().findStaff(input)!=-1)
-                {
-                    System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFistName() +" has logged in ! \n");
-                    owner.getStateMachine().pop(false);
-                    owner.getStateMachine().push(StaffMenuState.getInstance()); 
-                }
-               
+            if(owner.getStaffList().findStaff(input) != -1)
+            {
+                System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFistName() +" has logged in ! \n");
+                staffID = input;
+                owner.getStateMachine().pop(false);
+                owner.getStateMachine().push(StaffMenuState.getInstance()); 
+            }
             else
-                {
-                 System.out.print("\nWrong staff's ID !!\n");
-                 enter(owner);
-                }
+            {
+                System.out.print("\nWrong staff's ID !!\n");
+                enter(owner);
+            }
         }
     }
 

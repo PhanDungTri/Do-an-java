@@ -3,8 +3,7 @@ import java.util.LinkedList;
 public class GameList extends ProductList<Game>
 {
     /*Constructor*/
-    public GameList(PublisherList publisherList)
-    {
+    public GameList(PublisherList publisherList) {
         path = "./data/gamelist.bin";
 
         list = new LinkedList<Game>();
@@ -15,7 +14,7 @@ public class GameList extends ProductList<Game>
 
     /*Other methods*/
     @Override
-    public String toString(){
+    public String toString() {
         String str;
         str = "\n**Game List**\n--------------------\n";
         str += String.format("|%-10s|%-20s|%-20s|%-5s|%-10s|%-5s|%-20s|%-10s|%-8s|",  

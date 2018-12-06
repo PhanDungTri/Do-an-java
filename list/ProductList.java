@@ -16,7 +16,7 @@ public abstract class ProductList<T extends Product> implements IPrintable
     /*Get methods*/
     public T getProduct(String id)
     {
-        int index = findProduct(id);
+        int index = findProductByID(id);
         if (index == -1)
         {
             System.out.println("Cannot find ID!");
@@ -43,7 +43,7 @@ public abstract class ProductList<T extends Product> implements IPrintable
     }
 
     public int getQuantity(String id) {
-        int index = findProduct(id);
+        int index = findProductByID(id);
         int count = 0;
         if (index == -1)
         {
@@ -64,7 +64,7 @@ public abstract class ProductList<T extends Product> implements IPrintable
 
     /*Other methods*/
     public void addProduct(String id, int quantity, Class<T> tclass) {
-        int index = findProduct(id);
+        int index = findProductByID(id);
         if (index == -1)
         {
             System.out.println("This is new ID!");
@@ -113,7 +113,7 @@ public abstract class ProductList<T extends Product> implements IPrintable
     public abstract String toString();
 
     public void removeProduct(String id, int quantity) {
-        int index = findProduct(id);
+        int index = findProductByID(id);
         if (index == -1)
         {
             System.out.println("Failed: Cannot find ID!");
@@ -127,7 +127,7 @@ public abstract class ProductList<T extends Product> implements IPrintable
                     break;
                     
                 list.remove(index);
-                index = findProduct(id);
+                index = findProductByID(id);
             }
         }
 
@@ -135,7 +135,7 @@ public abstract class ProductList<T extends Product> implements IPrintable
     }
 
     public void removeAllProduct(String id) {
-        int index = findProduct(id);
+        int index = findProductByID(id);
         if (index == -1)
         {
             System.out.println("Failed: Cannot find ID!");
@@ -146,18 +146,58 @@ public abstract class ProductList<T extends Product> implements IPrintable
             while (index != -1)
             {
                 list.remove(index);
-                index = findProduct(id);
+                index = findProductByID(id);
             }
         }
-
+ 
         FileIO.rewriteFile(list, path);
     }
 
-    public int findProduct(String id) {
+    public int findProductByID(String id) {
         for (T product : list)
             if (product.getID().equals(id))
                 return list.indexOf(product);
 
         return -1;
+    }
+
+    public LinkedList<Product> findAllProductsByID(String id) {
+        LinkedList<Product> foundList = new LinkedList<Product>();
+
+        for (Product product : list)
+            if (product.getID().equals(id))
+                foundList.add(product);
+
+        return foundList;
+    }
+
+    public LinkedList<Product> findAllProductsByName(String name) {
+        LinkedList<Product> foundList = new LinkedList<Product>();
+
+        for (Product product : list)
+            if (product.getName().equalsIgnoreCase(name))
+                foundList.add(product);
+
+        return foundList;
+    }
+
+    public LinkedList<Product> findAllProductsByPublisher(String name) {
+        LinkedList<Product> foundList = new LinkedList<Product>();
+
+        for (Product product : list)
+            if (product.getPublisher().equalsIgnoreCase(name))
+                foundList.add(product);
+
+        return foundList;
+    }
+
+    public LinkedList<Product> findAllProductsByPrice(int price) {
+        LinkedList<Product> foundList = new LinkedList<Product>();
+
+        for (Product product : list)
+            if (product.getPrice() == price)
+                foundList.add(product);
+
+        return foundList;
     }
 }

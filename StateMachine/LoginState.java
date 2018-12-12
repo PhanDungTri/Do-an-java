@@ -1,3 +1,5 @@
+import javax.lang.model.util.ElementScanner6;
+
 public class LoginState implements State<Shop>
 {
     /*Constructor - Singleton*/
@@ -34,10 +36,26 @@ public class LoginState implements State<Shop>
         {
             if(owner.getStaffList().findStaff(input) != -1)
             {
-                System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFistName() +" has logged in ! \n");
-                staffID = input;
-                owner.getStateMachine().pop(false);
-                owner.getStateMachine().push(StaffMenuState.getInstance()); 
+                System.out.print("Password: ");
+                int flag=0;
+                String password = Shop.scanner.nextLine();
+                while (flag==0)
+                {
+                    if(owner.getStaffList().getStaff(input).getPassword().equals(password))
+                    {
+                        System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFistName() +" has logged in ! \n");
+                        staffID = input;
+                        owner.getStateMachine().pop(false);
+                        owner.getStateMachine().push(StaffMenuState.getInstance()); 
+                        flag=1;
+                    }
+                    else
+                    {
+                        System.out.print("Invalid input ! Password: ");
+                        password = Shop.scanner.nextLine();
+                    }
+                }                 
+               
             }
             else
             {

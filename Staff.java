@@ -1,6 +1,7 @@
 public class Staff implements IPrintable,IWritable {
     /*Member*/
     private String id ;
+    private String password;
     private String lastName ;
     private String firstName ;
     private String yearOfBirth ;
@@ -19,6 +20,7 @@ public class Staff implements IPrintable,IWritable {
 
     /*Set Methods*/
     public void     setID(String id) {this.id = id;}
+    public void     setPassword(String password){this.password = password;}
     public void     setLastName(String lastName) {this.lastName = lastName;}
     public void     setFirstName(String firstName) {this.firstName = firstName;}
     public void     setYearOfBirth (String yearOfBirth) {this.yearOfBirth = yearOfBirth;}
@@ -29,6 +31,7 @@ public class Staff implements IPrintable,IWritable {
 
     /*Get Methods*/
     public String getID() {return id ;}
+    public String getPassword() {return password;}
     public String getLastName() {return lastName;}
     public String getFistName() {return firstName;}
     public String getYearOfBirth() {return yearOfBirth;}
@@ -46,6 +49,9 @@ public class Staff implements IPrintable,IWritable {
 
     public void createStaffInfo()
     {
+        System.out.print("Input Password: ");
+        setFirstName(Shop.scanner.nextLine());
+
         System.out.print("Input First Name: ");
         setFirstName(Shop.scanner.nextLine());
 
@@ -69,7 +75,8 @@ public class Staff implements IPrintable,IWritable {
 
     @Override 
     public String toData() {
-        String str = getID() + " " 
+        String str = getID() + " "
+                   + getPassword() +" "
                    + getFistName().replace(" ", "_") + " "
                    + getLastName().replace(" ", "_") + " "
                    + getYearOfBirth() + " "
@@ -85,13 +92,14 @@ public class Staff implements IPrintable,IWritable {
     @Override
     public void getData(String[] str){
         setID(str[0]);
-        setFirstName(str[1].replace("_"," "));
-        setLastName(str[2].replace("_", " "));
-        setYearOfBirth(str[3]);
-        setAddress(str[4].replace("_", " "));
-        setPhoneNumber(str[5]);
-        setMail(str[6]);
-        setSalary(Integer.parseInt(str[7]));
+        setPassword(str[1]);
+        setFirstName(str[2].replace("_"," "));
+        setLastName(str[3].replace("_", " "));
+        setYearOfBirth(str[4]);
+        setAddress(str[5].replace("_", " "));
+        setPhoneNumber(str[6]);
+        setMail(str[7]);
+        setSalary(Integer.parseInt(str[8]));
     }
     
 }

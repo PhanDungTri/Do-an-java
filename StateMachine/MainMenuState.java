@@ -20,7 +20,7 @@ public class MainMenuState implements State<Shop>
     @Override
     public void enter(Shop owner) {
         System.out.print("\n+++++ WELCOME TO OUR SHOP +++++\n");
-        System.out.print("\n=== Choose the option ===\n1. Customer\n2. Staff\n3. Exit\nInput: ");
+        System.out.print("\n=== Choose the option ===\n1. Customer\n2. Staff\n3. Administrator\n4. Logout\nInput: ");
     }
 
     @Override
@@ -34,6 +34,9 @@ public class MainMenuState implements State<Shop>
                 owner.getStateMachine().push(LoginState.getInstance());
                 break;
             case 3:
+                owner.getStateMachine().push(LoginState.getInstance());
+                break;    
+            case 4:
                 System.out.println("\nGOODBYE!");
                 owner.getStateMachine().pop();
                 break;

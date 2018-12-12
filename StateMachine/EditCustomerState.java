@@ -38,7 +38,7 @@ public class EditCustomerState implements State<Shop>
             {
                 case 1:
                 Shop.scanner.nextLine();
-                System.out.print("\nInput Frist Name: ");
+                System.out.print("\nInput First Name: ");
                 String firstname = Shop.scanner.nextLine();
                 owner.getCustomerList().getCustomer(input).setFirstName(firstname);
                 FileIO.rewriteFile(owner.getCustomerList().list,"./data/customerlist.bin");

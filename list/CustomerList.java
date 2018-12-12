@@ -54,7 +54,6 @@ public class CustomerList {
            System.out.println("This customer was created");
         }
     }
-    
 
     public String toString(){
         String str;

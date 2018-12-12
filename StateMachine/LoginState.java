@@ -22,7 +22,7 @@ public class LoginState implements State<Shop>
     /*Other methods*/
     @Override
     public void enter(Shop owner) {
-        System.out.print("\nInput Staff's ID ('cancel' to go back): ");
+        System.out.print("\nInput Staff/Admin's ID ('cancel' to go back): ");
     }
 
     @Override
@@ -43,7 +43,10 @@ public class LoginState implements State<Shop>
                 {
                     if(owner.getStaffList().getStaff(input).getPassword().equals(password))
                     {
-                        System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFistName() +" has logged in ! \n");
+                        if(owner.getStaffList().getStaff(input).getIsAdmin())
+                            System.out.print("\nAdmin "+ owner.getStaffList().getStaff(input).getFistName() +" has logged in ! \n");
+                        else
+                            System.out.print("\nStaff "+ owner.getStaffList().getStaff(input).getFistName() +" has logged in ! \n");
                         staffID = input;
                         owner.getStateMachine().pop(false);
                         owner.getStateMachine().push(StaffMenuState.getInstance()); 

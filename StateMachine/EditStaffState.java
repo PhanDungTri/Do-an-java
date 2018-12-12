@@ -32,7 +32,12 @@ public class EditStaffState implements State<Shop>
         {
             owner.getStateMachine().pop();
         }
-        else
+        else if (owner.getStaffList().findStaff(input)==-1)
+        {
+            System.out.print("\nThis staff has not created ! Please input again: ");
+
+        }
+        else 
         {
             System.out.print("\n=== Staff's information ===\n");
             System.out.print( owner.getStaffList().getStaff(input).toString());

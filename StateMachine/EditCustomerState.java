@@ -29,7 +29,7 @@ public class EditCustomerState implements State<Shop>
         {
             owner.getStateMachine().pop();
         }
-        else
+        else if(owner.getCustomerList().findCustomer(input)!=-1)
         {
             System.out.print("\n=== Customer's infomation ===\n");
             System.out.print( owner.getCustomerList().getCustomer(input).toString());
@@ -97,6 +97,11 @@ public class EditCustomerState implements State<Shop>
         
             
            
+        }
+        else
+        {
+            System.out.print("\nThis customer has not created ! Please input again: ");
+
         }
     }
 

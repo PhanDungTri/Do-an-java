@@ -2,6 +2,7 @@ public class Staff implements IPrintable,IWritable {
     /*Member*/
     private String id ;
     private String password;
+    private boolean isAdmin;
     private String lastName ;
     private String firstName ;
     private String yearOfBirth ;
@@ -16,6 +17,7 @@ public class Staff implements IPrintable,IWritable {
     {
         setID (id) ;
         createStaffInfo();
+        isAdmin=false;
     }
 
     /*Set Methods*/
@@ -25,6 +27,7 @@ public class Staff implements IPrintable,IWritable {
     public void     setFirstName(String firstName) {this.firstName = firstName;}
     public void     setYearOfBirth (String yearOfBirth) {this.yearOfBirth = yearOfBirth;}
     public void     setAddress (String address) {this.address = address;}
+    public void     setAdmin(boolean isAdmin){this.isAdmin=isAdmin;}
     public void     setPhoneNumber (String phoneNumber) {this.phoneNumber = phoneNumber;}
     public void     setMail (String mail) {this.mail = mail;}
     public void     setSalary (int salary) {this.salary = salary;}
@@ -34,6 +37,7 @@ public class Staff implements IPrintable,IWritable {
     public String getPassword() {return password;}
     public String getLastName() {return lastName;}
     public String getFistName() {return firstName;}
+    public boolean getIsAdmin()  {return isAdmin;}
     public String getYearOfBirth() {return yearOfBirth;}
     public String getAddress() {return address;}
     public String getPhoneNumber() {return phoneNumber;}
@@ -50,7 +54,7 @@ public class Staff implements IPrintable,IWritable {
     public void createStaffInfo()
     {
         System.out.print("Input Password: ");
-        setFirstName(Shop.scanner.nextLine());
+        setPassword(Shop.scanner.nextLine());
 
         System.out.print("Input First Name: ");
         setFirstName(Shop.scanner.nextLine());
@@ -70,6 +74,9 @@ public class Staff implements IPrintable,IWritable {
         System.out.print("Input Mail: ");
         setMail(Shop.scanner.nextLine());
         
+        System.out.print("Set admin (true/false): ");
+        setAdmin(Shop.scanner.nextBoolean());
+
         setSalary(1500000);
     }
 
@@ -83,7 +90,8 @@ public class Staff implements IPrintable,IWritable {
                    + getAddress().replace(" ", "_") + " "
                    + getPhoneNumber() + " "
                    + getMail() + " "
-                   + getSalary() 
+                   + getSalary() +" "
+                   + getIsAdmin() + " "
                    + "xDATASEPARATEx";
 
         return str ;
@@ -100,6 +108,7 @@ public class Staff implements IPrintable,IWritable {
         setPhoneNumber(str[6]);
         setMail(str[7]);
         setSalary(Integer.parseInt(str[8]));
+        setAdmin(Boolean.parseBoolean(str[9]));
     }
     
 }

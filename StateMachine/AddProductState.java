@@ -38,10 +38,14 @@ public class AddProductState implements State<Shop>
                 System.out.print("How many products do you want to add? ");
                 int quantity = Shop.scanner.nextInt();
                 Shop.scanner.nextLine();
-                owner.getGameList().addProduct(id, quantity, Game.class);
-                for (int i = 0; i < quantity; ++i) {
-                    count.add(1);
+                boolean added = owner.getGameList().addProduct(id, quantity, Game.class);
+
+                if (added) {
+                    for (int i = 0; i < quantity; ++i) {
+                        count.add(1);
+                    }
                 }
+
                 enter(owner);
                 break;
             }
@@ -53,11 +57,15 @@ public class AddProductState implements State<Shop>
                 System.out.print("How many products do you want to add? ");
                 int quantity = Shop.scanner.nextInt();
                 Shop.scanner.nextLine();
-                owner.getCardList().addProduct(id, quantity, Card.class);
-                for (int i = 0; i < quantity; ++i) {
-                    count.add(2);
+                boolean added = owner.getCardList().addProduct(id, quantity, Card.class);
+
+                if (added) {
+                    for (int i = 0; i < quantity; ++i) {
+                        count.add(2);
+                    }
                 }
-                enter(owner);;
+
+                enter(owner);
                 break;
             }
             case 3:

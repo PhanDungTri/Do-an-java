@@ -33,14 +33,13 @@ public class PublisherList
     public int getQuantity(String name) {
         return getPublisher(name).getQuantity();
     }
-
-    /*Set methods*/
+    
     /*Other methods*/
     public void addPublisher(String name) {
         int index = findPublisher(name);
         if (index != -1)
         {
-            System.out.println("Publisher is already exist!");
+            System.out.println("Publisher has already existed!");
             return;
         }
         
@@ -52,7 +51,7 @@ public class PublisherList
         int index = findPublisher(name);
         if (index != -1)
         {
-            System.out.println("Publisher is already exist!");
+            System.out.println("Publisher has already existed!");
             return;
         }
 
@@ -71,11 +70,13 @@ public class PublisherList
 
     public boolean checkPublisherList(Product product) {
         String publisher = product.getPublisher();
+        String name = product.getName();
+        String id = product.getID();
         if (findPublisher(publisher) == -1) 
         {
             System.out.println("This is new publisher! Adding to the list!");
             addPublisher(publisher);
-            getPublisher(publisher).addTitle(product.getName());
+            getPublisher(publisher).addTitle(name, id);
             FileIO.rewriteFile(list, path);
             return true;
         }
@@ -83,16 +84,19 @@ public class PublisherList
         {
             Publisher existPublisher = getPublisher(publisher);
 
-            if (existPublisher.findTitle(product.getName()) != -1)
+            if (existPublisher.find(name, id) != -1)
             {
-                System.out.println("This product is already exist! Re-check the ID!");
-                return false;
+                return true;
             }
-            else
+            else if (existPublisher.findID(id) == -1 && existPublisher.findName(name) == -1)
             {
-                existPublisher.addTitle(product.getName());
+                existPublisher.addTitle(product.getName(), product.getID());
                 FileIO.rewriteFile(list, path);
                 return true;
+            }
+            else {
+                System.out.println("Invalid ID or product name - The ID or Name has existed and it has another Name or ID");
+                return false;
             }
         }
     }

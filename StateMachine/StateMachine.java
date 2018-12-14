@@ -5,12 +5,12 @@ public class StateMachine<T>
     /*Constructor*/
     public StateMachine(T owner) {
         this.owner = owner;
-        stateStack = new Stack<State<T>>();
+        stateStack = new LinkedList<State<T>>();
     }
 
     /*Members*/
     private T owner;
-    private Stack<State<T>> stateStack;
+    private LinkedList<State<T>> stateStack;
 
     /*Get methods*/
 
@@ -21,9 +21,9 @@ public class StateMachine<T>
         if (state != null)
         {
             if (!stateStack.isEmpty())
-                stateStack.peek().exit(owner);
-            stateStack.push(state);
-            stateStack.peek().enter(owner);
+                stateStack.getLast().exit(owner);
+            stateStack.add(state);
+            stateStack.getLast().enter(owner);
         }
         else
             System.out.println("Failed! Trying to change to a null state!");
@@ -33,7 +33,7 @@ public class StateMachine<T>
         stateStack.pop().exit(owner);
 
         if (!stateStack.isEmpty() && skipEnter)
-        stateStack.peek().enter(owner);
+        stateStack.getLast().enter(owner);
     }
 
     public void pop() {
@@ -43,7 +43,7 @@ public class StateMachine<T>
     public void update()
     {
         if (!stateStack.isEmpty())
-            stateStack.peek().execute(owner);;
+            stateStack.getLast().execute(owner);;
     }
 
     public boolean isEmpty() {

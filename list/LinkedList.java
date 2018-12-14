@@ -130,6 +130,12 @@ public class LinkedList<AnyType> implements Iterable<AnyType>
       remove(get(index));
    }
 
+   public AnyType pop() {
+      AnyType last = getLast();
+      remove(getLast());
+      return last;
+   }
+
    private static class Node<AnyType>
    {
       private AnyType data;

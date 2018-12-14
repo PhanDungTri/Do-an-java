@@ -49,6 +49,8 @@ public class FileIO
             try {
                 byte[] data = Files.readAllBytes(Paths.get(path));
                 String str = new String(data);
+                if (str.length() == 0) return;
+                
                 String[] info = str.split("xDATASEPARATEx");
             
                 for (String s : info)

@@ -36,8 +36,6 @@ public class MainMenuState implements State<Shop>
             case 3:
                 System.out.println("\nGOODBYE!");
                 owner.getStateMachine().pop();
-            case 4:
-                 owner.getStateMachine().push(EditGameState.getInstance());
                 break;
             default:
                 System.out.print("Invalid option! Please input: ");

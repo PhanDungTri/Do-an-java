@@ -12,10 +12,6 @@ public class StateMachine<T>
     private T owner;
     private LinkedList<State<T>> stateStack;
 
-    /*Get methods*/
-
-    /*Set methods*/
-
     /*Other methods*/
     public void push(State<T> state) {
         if (state != null)

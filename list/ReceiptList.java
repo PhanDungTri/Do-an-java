@@ -26,6 +26,16 @@ public class ReceiptList {
         return list.get(index - 1);
     }
 
+    public int findID(String id) {
+        for (Receipt re : list) {
+            if (re.getID().equals(id)) {
+                return list.indexOf(re);
+            }
+        }
+
+        return -1;
+    }
+
     public Receipt getLast() {
         return list.getLast();
     }

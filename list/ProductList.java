@@ -63,11 +63,10 @@ public abstract class ProductList<T extends Product> implements IPrintable
     /*Set methods*/
 
     /*Other methods*/
-    public void addProduct(String id, int quantity, Class<T> tclass) {
+    public boolean addProduct(String id, int quantity, Class<T> tclass) {
         int index = findProductByID(id);
         if (index == -1)
         {
-            System.out.println("This is new ID!");
             try
             {
                 T newProduct = (T)tclass.getConstructor(String.class).newInstance(id);
@@ -75,7 +74,7 @@ public abstract class ProductList<T extends Product> implements IPrintable
                 if (!publisherList.checkPublisherList(newProduct))
                 {
                     System.out.println("Failed! Invalid information!");
-                    return;
+                    return false;
                 }
 
                 list.add(newProduct);
@@ -91,6 +90,8 @@ public abstract class ProductList<T extends Product> implements IPrintable
             {
                 e.printStackTrace();
             }
+
+            return true;
         }
         else
         {
@@ -108,6 +109,8 @@ public abstract class ProductList<T extends Product> implements IPrintable
                     e.printStackTrace();
                 }
             }
+
+            return true;
         }
     }
     public abstract String toString();

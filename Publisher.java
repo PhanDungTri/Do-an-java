@@ -37,18 +37,18 @@ public class Publisher implements IPrintable, IWritable
     }
 
     /*Other methods*/
-    public void addTitle(String name) {
-        if (findTitle(name) != -1)
+    public void addTitle(String name, String id) {
+        if (find(name, id) != -1)
         {
-            System.out.println("Title is already exist!");
+            System.out.println("Title or ID is already exist!");
             return;
         }
-
-        titleList.add(name);
+        String info = id + "::" + name;
+        titleList.add(info);
     }
 
     public void removeTitle(String name) {
-        int index = findTitle(name);
+        int index = findName(name);
         if (index == -1)
         {
             System.out.println("Cannot find title!");
@@ -58,11 +58,34 @@ public class Publisher implements IPrintable, IWritable
         titleList.remove(index);
     }
 
-    public int findTitle(String name) {
+    public int findName(String name) {
         for (String str : titleList)
         {
-            if (str.equals(name))
+            String[] s = str.split("::");
+            if (s[1].equals(name))
                 return titleList.indexOf(str);
+        }
+
+        return -1;
+    }
+
+    public int findID(String id) {
+        for (String str : titleList)
+        {
+            String[] s = str.split("::");
+            if (s[0].equals(id))
+                return titleList.indexOf(str);
+        }
+
+        return -1;
+    }
+
+    public int find(String name, String id) {
+        for (String str : titleList) {
+            String[] s = str.split("::");
+            if (s[1].equals(name) && s[0].equals(id)) {
+                return titleList.indexOf(str);
+            }
         }
 
         return -1;

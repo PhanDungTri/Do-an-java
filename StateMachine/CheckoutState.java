@@ -111,10 +111,11 @@ public class CheckoutState implements State<Shop>
             case 3:
             {
                 int check = 1;
+                String customerID = "";
                 do {
                     check = 0;
                     System.out.print("Input customer ID ('000' for non-member customer): ");
-                    String customerID = Shop.scanner.nextLine();
+                    customerID = Shop.scanner.nextLine();
                     if (owner.getCustomerList().findCustomer(customerID) == -1 && customerID.equals("000")) {
                         System.out.print("Cannot find ID! Please input: ");
                         check = 1;

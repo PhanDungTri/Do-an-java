@@ -27,7 +27,7 @@ public class Publisher implements IPrintable, IWritable
         return titleList.size();
     }
 
-    public int getTitleList() {
+    public LinkedList<String> getTitleList() {
         return titleList;
     }
 

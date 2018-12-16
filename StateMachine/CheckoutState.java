@@ -21,7 +21,7 @@ public class CheckoutState implements State<Shop>
     /*Other methods*/
     @Override
     public void enter(Shop owner) {
-        System.out.print("\n=== Choose the option ===\n1. Add Product\n2. Remove Product\n3. Checkout\n4. Cancel\nInput: ");
+        System.out.print("\n=== Choose the option ===\n1. Add Product To Cart\n2. Remove Product From Cart\n3.View Cart\n4. Checkout\n5. Cancel\nInput: ");
     }
 
     @Override
@@ -31,11 +31,13 @@ public class CheckoutState implements State<Shop>
             case 1:
             {
                 int check = 1;
+                
+                System.out.print("\n--Which type of product do you want to add?\n1. Game\n2. Card\n3. Cancel\nInput: ");
                 do {
                     check = 0;
-                    System.out.print("\n--Which type of product do you want to add?\n1. Game\n2. Card\n3. Cancel\nInput: ");
                     int type = Shop.scanner.nextInt();
-                    if ( type != 1 || type != 2) {
+                    if (type == 3) { break; }
+                    if ( type != 1 && type != 2) {
                         check = 1;
                         System.out.print("Invalid option! Please input: ");
                     }
@@ -81,11 +83,13 @@ public class CheckoutState implements State<Shop>
             case 2:
             {
                 int check = 1;
+                
+                System.out.print("\n--Which type of product do you want to remove?\n1. Game\n2. Card\n3. Cancel\nInput: ");
                 do {
                     check = 0;
-                    System.out.print("\n--Which type of product do you want to remove?\n1. Game\n2. Card\n3. Cancel\nInput: ");
                     int type = Shop.scanner.nextInt();
-                    if ( type != 1 || type != 2) {
+                    if (type == 3) { break; }
+                    if ( type != 1 && type != 2) {
                         check = 1;
                         System.out.print("Invalid option! Please input: ");
                     }
@@ -110,13 +114,21 @@ public class CheckoutState implements State<Shop>
             }
             case 3:
             {
+                System.out.println("--Cart Information--");
+                System.out.print(cart.toString());
+                enter(owner);
+                break;
+            }
+            case 4:
+            {
                 int check = 1;
                 String customerID = "";
                 do {
                     check = 0;
+                    Shop.scanner.nextLine();
                     System.out.print("Input customer ID ('000' for non-member customer): ");
                     customerID = Shop.scanner.nextLine();
-                    if (owner.getCustomerList().findCustomer(customerID) == -1 && customerID.equals("000")) {
+                    if (owner.getCustomerList().findCustomer(customerID) == -1 && !customerID.equals("000")) {
                         System.out.print("Cannot find ID! Please input: ");
                         check = 1;
                     }
@@ -155,12 +167,13 @@ public class CheckoutState implements State<Shop>
                 
                 if (!customerID.equals("000")) {
                     Customer customer = owner.getCustomerList().getCustomer(customerID);
-                    customer.setPoint(receipt.getCost() / 1000);
+                    customer.setPoint(customer.getPoint() + (receipt.getCost() / 1000));
 
                     FileIO.rewriteFile(owner.getCustomerList().getList(), "./data/customerlist.bin");
                 }
 
                 FileIO.writeToFile(receipt, "./data/receiptlist.bin");
+                owner.getReceiptList().addReceipt(receipt);
 
                 System.out.println("====================");
                 System.out.println(receipt.toString());
@@ -169,14 +182,13 @@ public class CheckoutState implements State<Shop>
                 owner.getStateMachine().pop();
                 break;
             }
-            case 4:
+            case 5:
                 owner.getStateMachine().pop();
                 break;
             default:
                 System.out.print("Invalid option! Please input: ");
                 break;
         }
-        Shop.scanner.nextLine();
     }
 
     @Override

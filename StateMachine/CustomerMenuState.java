@@ -19,7 +19,7 @@ public class CustomerMenuState implements State<Shop>
     /*Other methods*/
     @Override
     public void enter(Shop owner) {
-        System.out.print("\n=== Choose the option ===\n1. Register\n2. Cart\n3. Cancel\nInput: ");
+        System.out.print("\n=== Choose the option ===\n1. Register\n2. Cancel\nInput: ");
     }
 
     @Override
@@ -30,8 +30,6 @@ public class CustomerMenuState implements State<Shop>
                 owner.getStateMachine().push(RegisterState.getInstance());
                 break;
             case 2:
-                owner.getStateMachine().push(CheckoutState.getInstance());
-            case 3:
                 owner.getStateMachine().pop();
                 break;
             default:

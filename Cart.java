@@ -1,4 +1,4 @@
-public class Cart {
+public class Cart implements IPrintable{
     /*Constructor*/
     public Cart() {
         cart = new LinkedList<String>();
@@ -65,5 +65,15 @@ public class Cart {
 
     public void clear() {
         cart.clear();
+    }
+
+    @Override
+    public String toString() {
+        String info = "";
+        for (String str : cart) {
+            info += str + "\n";
+        }
+
+        return info;
     }
 }

@@ -19,6 +19,7 @@ public class Receipt implements IPrintable, IWritable {
     public Receipt(String id, String staff, ReceiptType type) {
         this.id = new String("");
         this.staff = new String("");
+        customerID = new String("");
         date = new String("");
         setID(id);
         setDate(new SimpleDateFormat("yy-MM-dd HH:mm").format(new Date()));

@@ -20,13 +20,14 @@ public class StaffMenuState implements State<Shop>
     @Override
     public void enter(Shop owner) {
         System.out.print("\n=== Choose the option ===\n1.  Add product\n2.  Remove Product\n3.  View list\n4.  View Publisher" +
-                         "\n5.  Get Quantity\n6.  Find Product\n7.  Edit Customer\n8.  Edit Game\n9.  Edit Card\n10. View Receipt\n");
+                         "\n5.  Get Quantity\n6.  Find Product\n7.  Edit Customer\n8.  Edit Game\n9.  Edit Card\n10. View Receipt\n" +
+                         "==========\n11. Sell products\n");
         if(owner.getStaffList().getStaff(LoginState.staffID).getIsAdmin())
         {
-            System.out.print("11. Edit Staff\n12. Add Staff\n13. Logout\nInput: ");
+            System.out.print("12. Edit Staff\n13. Add Staff\n14. Logout\nInput: ");
         }
         else {
-            System.out.print("11. Logout\nInput: ");
+            System.out.print("12. Logout\nInput: ");
         }
     }
 
@@ -66,6 +67,9 @@ public class StaffMenuState implements State<Shop>
                     owner.getStateMachine().push(ViewReceiptState.getInstance());
                     break;
                 case 11:
+                    owner.getStateMachine().push(CheckoutState.getInstance());
+                    break;
+                case 12:
                 {
                     if(owner.getStaffList().getStaff(LoginState.staffID).getIsAdmin())
                     {
@@ -77,7 +81,7 @@ public class StaffMenuState implements State<Shop>
                         break;
                     }
                 }
-                case 12:
+                case 13:
                 {
                     if(owner.getStaffList().getStaff(LoginState.staffID).getIsAdmin())
                     {
@@ -85,7 +89,7 @@ public class StaffMenuState implements State<Shop>
                         break;
                     }
                 }
-                case 13:
+                case 14:
                 {
                     if(owner.getStaffList().getStaff(LoginState.staffID).getIsAdmin())
                     {

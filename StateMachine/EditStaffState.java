@@ -42,72 +42,81 @@ public class EditStaffState implements State<Shop>
             System.out.print("\n=== Staff's information ===\n");
             System.out.print( owner.getStaffList().getStaff(input).toString());
             System.out.print("\n=== Choose the option ===\n1. Fist Name\n2. Last Name\n3. Year Of Birth\n4. Address\n5. Phone Number\n6. Mail\n7. Salary\nInput: ");
-            switch( Shop.scanner.nextInt())
-            {
-                case 1:
-                Shop.scanner.nextLine();
-                System.out.print("\nInput First Name: ");
-                String firstname = Shop.scanner.nextLine();
-                owner.getStaffList().getStaff(input).setFirstName(firstname);
-                FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
-                enter(owner);
-                break;
+            int isDone=1;
+            do  {
+                isDone =0;
+                switch( Shop.scanner.nextInt())
+                {
+                    case 1:
+                    Shop.scanner.nextLine();
+                    System.out.print("\nInput First Name: ");
+                    String firstname = Shop.scanner.nextLine();
+                    owner.getStaffList().getStaff(input).setFirstName(firstname);
+                    FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
+                    enter(owner);
+                    break;
+    
+                    case 2:
+                    Shop.scanner.nextLine();
+                    System.out.print("\nInput Last Name: ");
+                    String lastname = Shop.scanner.nextLine();
+                    owner.getStaffList().getStaff(input).setLastName(lastname);
+                    FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
+                    enter(owner);
+                    break;
+    
+                    case 3:
+                    Shop.scanner.nextLine();
+                    System.out.print("\nInput Year Of Birth: ");
+                    String yearofbirth = Shop.scanner.nextLine();
+                    owner.getStaffList().getStaff(input).setYearOfBirth(yearofbirth);
+                    FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
+                    enter(owner);
+                    break;
+    
+                    case 4:
+                    Shop.scanner.nextLine();
+                    System.out.print("\nInput Address: ");
+                    String add = Shop.scanner.nextLine();
+                    owner.getStaffList().getStaff(input).setAddress(add);
+                    FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
+                    enter(owner);
+                    break;
+    
+                    case 5:
+                    Shop.scanner.nextLine();
+                    System.out.print("\nInput Phone Number: ");
+                    String phonenum = Shop.scanner.nextLine();
+                    owner.getStaffList().getStaff(input).setPhoneNumber(phonenum);
+                    FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
+                    enter(owner);
+                    break;
+    
+                    case 6:
+                    Shop.scanner.nextLine();
+                    System.out.print("\nInput Mail: ");
+                    String mail = Shop.scanner.nextLine();
+                    owner.getStaffList().getStaff(input).setMail(mail);
+                    FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
+                    enter(owner);
+                    break;
+    
+                    case 7:
+                    Shop.scanner.nextLine();
+                    System.out.print("\nInput First Name: ");
+                    int salary = Shop.scanner.nextInt();
+                    owner.getStaffList().getStaff(input).setSalary(salary);
+                    FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
+                    Shop.scanner.nextLine();
+                    enter(owner);
+                    break;
+                    default:
+                    isDone=1;
+                    System.out.print("Invalid option! Please input: ");
 
-                case 2:
-                Shop.scanner.nextLine();
-                System.out.print("\nInput Last Name: ");
-                String lastname = Shop.scanner.nextLine();
-                owner.getStaffList().getStaff(input).setLastName(lastname);
-                FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
-                enter(owner);
-                break;
-
-                case 3:
-                Shop.scanner.nextLine();
-                System.out.print("\nInput Year Of Birth: ");
-                String yearofbirth = Shop.scanner.nextLine();
-                owner.getStaffList().getStaff(input).setYearOfBirth(yearofbirth);
-                FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
-                enter(owner);
-                break;
-
-                case 4:
-                Shop.scanner.nextLine();
-                System.out.print("\nInput Address: ");
-                String add = Shop.scanner.nextLine();
-                owner.getStaffList().getStaff(input).setAddress(add);
-                FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
-                enter(owner);
-                break;
-
-                case 5:
-                Shop.scanner.nextLine();
-                System.out.print("\nInput Phone Number: ");
-                String phonenum = Shop.scanner.nextLine();
-                owner.getStaffList().getStaff(input).setPhoneNumber(phonenum);
-                FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
-                enter(owner);
-                break;
-
-                case 6:
-                Shop.scanner.nextLine();
-                System.out.print("\nInput Mail: ");
-                String mail = Shop.scanner.nextLine();
-                owner.getStaffList().getStaff(input).setMail(mail);
-                FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
-                enter(owner);
-                break;
-
-                case 7:
-                Shop.scanner.nextLine();
-                System.out.print("\nInput First Name: ");
-                int salary = Shop.scanner.nextInt();
-                owner.getStaffList().getStaff(input).setSalary(salary);
-                FileIO.rewriteFile(owner.getStaffList().list,"./data/stafflist.bin");
-                Shop.scanner.nextLine();
-                enter(owner);
-                break;
-            }
+                }
+            } while(isDone==1);
+            
         }
     }
 

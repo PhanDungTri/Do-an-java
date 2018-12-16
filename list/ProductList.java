@@ -14,6 +14,8 @@ public abstract class ProductList<T extends Product> implements IPrintable
     public String path;
 
     /*Get methods*/
+    public LinkedList<T> getList() { return list; }
+    
     public T getProduct(String id)
     {
         int index = findProductByID(id);

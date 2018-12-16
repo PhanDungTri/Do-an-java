@@ -37,31 +37,58 @@ public class EditGameState implements State<Shop>
             switch( Shop.scanner.nextInt())
             {
                 case 1:
-                Shop.scanner.nextLine();
-                System.out.print("\nInput Name: ");
-                String name = Shop.scanner.nextLine();
-                for (Game product : owner.getGameList().list)
                 {
-                    if(product.getID().equals(input))
-                         product.setName(name);
-                }       
-                FileIO.rewriteFile(owner.getGameList().list,"./data/gamelist.bin");
-                enter(owner);
-                break;
+                    Game game = owner.getGameList().getProduct(input);
+                    Shop.scanner.nextLine();
+                    String oldName = game.getName();
+                    System.out.print("\nInput Name: ");
+                    String name = Shop.scanner.nextLine();
+                    for (Game product : owner.getGameList().list)
+                    {
+                        if(product.getID().equals(input))
+                                product.setName(name);
+                    }
 
+                    Publisher publisher = owner.getPublisherList().getPublisher(game.getPublisher());
+                    publisher.removeTitle(oldName);
+                    publisher.addTitle(name, input);
+
+                    FileIO.rewriteFile(owner.getPublisherList().getList(), "./data/publisherlist.bin");
+                    FileIO.rewriteFile(owner.getGameList().getList(),"./data/gamelist.bin");
+                    enter(owner);
+                    break;
+                }
                 case 2:
-                Shop.scanner.nextLine();
-                System.out.print("\nInput Pushlisher: ");
-                String pushlisher = Shop.scanner.nextLine();
-                for (Game product : owner.getGameList().list)
                 {
-                    if(product.getID().equals(input))
-                         product.setPublisher(pushlisher);
-                }            
-                FileIO.rewriteFile(owner.getGameList().list,"./data/gamelist.bin");
-                enter(owner);
-                break;
+                    Shop.scanner.nextLine();
+                    Game game = owner.getGameList().getProduct(input);
+                    System.out.print("\nInput Pushlisher: ");
+                    String pushlisher = Shop.scanner.nextLine();
+                    String oldPublisher = game.getPublisher();
 
+                    for (Game product : owner.getGameList().getList())
+                    {
+                        if(product.getID().equals(input))
+                            product.setPublisher(pushlisher);
+                    } 
+
+                    PublisherList list = owner.getPublisherList();
+                    
+                    list.getPublisher(oldPublisher).removeTitle(game.getName());
+
+                    if (list.findPublisher(pushlisher) != -1) {
+                        list.getPublisher(pushlisher).addTitle(game.getName(), game.getID());
+                    }
+                    else {
+                        list.addPublisher(pushlisher);
+                        list.getPublisher(pushlisher).addTitle(game.getName(), game.getID());
+                    }
+
+                    FileIO.rewriteFile(owner.getPublisherList().getList(), "./data/publisherlist.bin");
+                    FileIO.rewriteFile(owner.getGameList().getList(),"./data/gamelist.bin");
+                    enter(owner);
+                    break;
+                }
                 case 3:
                 Shop.scanner.nextLine();
                 System.out.print("\nInput Price: ");

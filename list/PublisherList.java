@@ -33,6 +33,8 @@ public class PublisherList
     public int getQuantity(String name) {
         return getPublisher(name).getQuantity();
     }
+
+    public LinkedList<Publisher> getList() { return list; }
     
     /*Other methods*/
     public void addPublisher(String name) {

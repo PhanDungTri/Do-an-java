@@ -98,12 +98,12 @@ public class EditGameState implements State<Shop>
                         Shop.scanner.nextLine();
                         System.out.print("\nInput Price: ");
                         int price = Shop.scanner.nextInt();
-                        for (Game product : owner.getGameList().list)
+                        for (Game product : owner.getGameList().getList())
                         {
                             if(product.getID().equals(input))
                                     product.setPrice(price);
                         }          
-                        FileIO.rewriteFile(owner.getGameList().list,"./data/gamelist.bin");
+                        FileIO.rewriteFile(owner.getGameList().getList(),"./data/gamelist.bin");
                         Shop.scanner.nextLine();
                         enter(owner);
                         break;
@@ -113,12 +113,12 @@ public class EditGameState implements State<Shop>
                         Shop.scanner.nextLine();
                         System.out.print("\nInput Release Year: ");
                         int releaseyear = Shop.scanner.nextInt();
-                        for (Game product : owner.getGameList().list)
+                        for (Game product : owner.getGameList().getList())
                         {
                             if(product.getID().equals(input))
                                 product.setReleasedYear(releaseyear);
                         }          
-                        FileIO.rewriteFile(owner.getGameList().list,"./data/gamelist.bin");
+                        FileIO.rewriteFile(owner.getGameList().getList(),"./data/gamelist.bin");
                         Shop.scanner.nextLine();
                         enter(owner);
                         break;
@@ -135,49 +135,49 @@ public class EditGameState implements State<Shop>
                             switch (Shop.scanner.nextInt())
                             {
                                 case 1:
-                                    for (Game product : owner.getGameList().list)
+                                    for (Game product : owner.getGameList().getList())
                                     {
                                         if(product.getID().equals(input))
                                         product.setGenre(Game.Genre.Action);
                                     }         
                                     break;
                                 case 2:
-                                    for (Game product : owner.getGameList().list)
+                                    for (Game product : owner.getGameList().getList())
                                     {
                                         if(product.getID().equals(input))
                                         product.setGenre(Game.Genre.Action_adventure);
                                     }  
                                     break; 
                                 case 3:
-                                for (Game product : owner.getGameList().list)
+                                for (Game product : owner.getGameList().getList())
                                     {
                                         if(product.getID().equals(input))
                                         product.setGenre(Game.Genre.Adventure);
                                     }   
                                     break;
                                 case 4:
-                                    for (Game product : owner.getGameList().list)
+                                    for (Game product : owner.getGameList().getList())
                                     {
                                         if(product.getID().equals(input))
                                         product.setGenre(Game.Genre.Simulation);
                                     }   
                                     break;
                                 case 5:
-                                    for (Game product : owner.getGameList().list)
+                                    for (Game product : owner.getGameList().getList())
                                     {
                                         if(product.getID().equals(input))
                                         product.setGenre(Game.Genre.Strategy);
                                     } 
                                     break;  
                                 case 6:
-                                    for (Game product : owner.getGameList().list)
+                                    for (Game product : owner.getGameList().getList())
                                     {
                                     if(product.getID().equals(input))
                                     product.setGenre(Game.Genre.Sports);
                                     }   
                                     break;
                                 case 7:
-                                    for (Game product : owner.getGameList().list)
+                                    for (Game product : owner.getGameList().getList())
                                     {
                                     if(product.getID().equals(input))
                                     product.setGenre(Game.Genre.Role_playing);
@@ -188,7 +188,7 @@ public class EditGameState implements State<Shop>
                                     break;
                             }
                         }
-                        FileIO.rewriteFile(owner.getGameList().list,"./data/gamelist.bin");
+                        FileIO.rewriteFile(owner.getGameList().getList(),"./data/gamelist.bin");
                         Shop.scanner.nextLine();
                         enter(owner);
                         break;
@@ -196,17 +196,63 @@ public class EditGameState implements State<Shop>
                     case 6:
                     {
                         Shop.scanner.nextLine();
-                        System.out.print("\nInput Point: ");
-                        int point = Shop.scanner.nextInt();
-                        owner.getCustomerList().getCustomer(input).setPoint(point);
-                        FileIO.rewriteFile(owner.getCustomerList().list,"./data/customerlist.bin");
+                        System.out.print("\nInput version: ");
+                        String version = Shop.scanner.nextLine();
+                        for (Game product : owner.getGameList().getList())
+                        {
+                            if(product.getID().equals(input))
+                                product.setVersion(version);
+                        }    
+
+                        FileIO.rewriteFile(owner.getGameList().getList(),"./data/gamelist.bin");
+                        enter(owner);
+                        break;
+                    }
+                    case 7:
+                    {
+                        Shop.scanner.nextLine();
+                        int check=0;
+                        while (check == 0)
+                        {
+                            check = 1;
+                            System.out.print("1. Steam\n2. Origin\n3. BattleNet\n");
+                            System.out.print("Choose platform: ");
+                            switch (Shop.scanner.nextInt())
+                            {
+                                case 1:
+                                    for (Game product : owner.getGameList().getList())
+                                    {
+                                        if(product.getID().equals(input))
+                                        product.setPlatform(Game.Platform.Steam);
+                                    }         
+                                    break;
+                                case 2:
+                                    for (Game product : owner.getGameList().getList())
+                                    {
+                                        if(product.getID().equals(input))
+                                        product.setPlatform(Game.Platform.Origin);
+                                    }  
+                                    break; 
+                                case 3:
+                                    for (Game product : owner.getGameList().getList())
+                                    {
+                                        if(product.getID().equals(input))
+                                        product.setPlatform(Game.Platform.BattleNet);
+                                    }   
+                                    break;
+                                default: 
+                                    check = 0;
+                                    break;
+                            }
+                        }
+                        FileIO.rewriteFile(owner.getGameList().getList(),"./data/gamelist.bin");
                         Shop.scanner.nextLine();
                         enter(owner);
                         break;
                     }
                     default: 
                     {
-                        System.out.println("Invalid option! Please input: ");
+                        System.out.print("Invalid option! Please input: ");
                         isDone = 1;
                         break;
                     }

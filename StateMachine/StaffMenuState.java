@@ -19,14 +19,14 @@ public class StaffMenuState implements State<Shop>
     /*Other methods*/
     @Override
     public void enter(Shop owner) {
-        System.out.print("\n=== Choose the option ===\n1. Add product\n2. Remove Product\n3. View list\n4. View Publisher" +
-                         "\n5. Get Quantity\n6. Find Product\n7. Edit Customer\n8. Edit Game\n9. View Receipt\n");
+        System.out.print("\n=== Choose the option ===\n1.  Add product\n2.  Remove Product\n3.  View list\n4.  View Publisher" +
+                         "\n5.  Get Quantity\n6.  Find Product\n7.  Edit Customer\n8.  Edit Game\n9.  Edit Card\n10. View Receipt\n");
         if(owner.getStaffList().getStaff(LoginState.staffID).getIsAdmin())
         {
-            System.out.print("10. Edit Staff\n11. Add Staff\n12. Logout\nInput: ");
+            System.out.print("11. Edit Staff\n12. Add Staff\n13. Logout\nInput: ");
         }
         else {
-            System.out.print("10. Logout\nInput: ");
+            System.out.print("11. Logout\nInput: ");
         }
     }
 
@@ -60,9 +60,12 @@ public class StaffMenuState implements State<Shop>
                     owner.getStateMachine().push(EditGameState.getInstance());
                     break;
                 case 9:
-                    owner.getStateMachine().push(ViewReceiptState.getInstance());
+                    owner.getStateMachine().push(EditCardState.getInstance());
                     break;
                 case 10:
+                    owner.getStateMachine().push(ViewReceiptState.getInstance());
+                    break;
+                case 11:
                 {
                     if(owner.getStaffList().getStaff(LoginState.staffID).getIsAdmin())
                     {
@@ -74,7 +77,7 @@ public class StaffMenuState implements State<Shop>
                         break;
                     }
                 }
-                case 11:
+                case 12:
                 {
                     if(owner.getStaffList().getStaff(LoginState.staffID).getIsAdmin())
                     {
@@ -82,7 +85,7 @@ public class StaffMenuState implements State<Shop>
                         break;
                     }
                 }
-                case 12:
+                case 13:
                 {
                     if(owner.getStaffList().getStaff(LoginState.staffID).getIsAdmin())
                     {

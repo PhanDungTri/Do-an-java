@@ -15,6 +15,8 @@ public class CustomerList {
     }
  
     /*Get Methods*/
+    public LinkedList<Customer> getList() { return list; }
+    
     public Customer getCustomer(String id)
     {
         int index = findCustomer(id);

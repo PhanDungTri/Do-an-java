@@ -13,6 +13,7 @@ public class Receipt implements IPrintable, IWritable {
         staff = new String("");
         date = new String("");
         info = new String("");
+        customerID = new String("");
     }
 
     public Receipt(String id, String staff, ReceiptType type) {
@@ -34,6 +35,7 @@ public class Receipt implements IPrintable, IWritable {
     String info;
     String staff;
     String id;
+    String customerID;
     int cost;
 
     /*Get methods*/
@@ -42,6 +44,7 @@ public class Receipt implements IPrintable, IWritable {
     public String getInfo() { return info; }
     public String getStaff() { return staff; }
     public String getID() { return id; }
+    public String getCustomerID() { return customerID; }
     public int getCost() { return cost; }
     public ReceiptType getType() { return type; }
 
@@ -51,6 +54,7 @@ public class Receipt implements IPrintable, IWritable {
     public void setInfo(String info) { this.info = info; }
     public void setStaff(String staff) { this.staff = staff; }
     public void setID(String id) { this.id = id; }
+    public void setCustomerID(String id) { customerID = id; }
     public void setCost(int cost) { this.cost = cost; }
     public void setType(ReceiptType type) { this.type = type; }
     
@@ -63,8 +67,17 @@ public class Receipt implements IPrintable, IWritable {
 
     @Override
     public String toString() {
-        String str = String.format("|%-8s|%-10s|%-20s|%-20s|%-5s|%-10s|\n", "Action", "ID", "Staff", "Date", "Quan.", "Price");
-        str += String.format("|%-8s|%-10s|%-20s|%-20s|%-5s|%-10s|\n\n", getType().toString(), getID(), getStaff(), getDate(), getQuantity(), getCost()) + getInfo();
+        String str = "";
+        if (getType() == ReceiptType.Import) {
+            str = String.format("|%-8s|%-10s|%-20s|%-20s|%-5s|%-10s|\n", "Action", "ID", "Staff", "Date", "Quan.", "Price");
+            str += String.format("|%-8s|%-10s|%-20s|%-20s|%-5s|%-10s|\n\n", getType().toString(), getID(), getStaff(), getDate(), getQuantity(), getCost());
+        }
+        else {
+            str = String.format("|%-8s|%-10s|%-20s|%-20s|%-5s|%-10s|%-10s|\n", "Action", "ID", "Staff", "Date", "Quan.", "Price", "Customer");
+            str += String.format("|%-8s|%-10s|%-20s|%-20s|%-5s|%-10s|\n\n", getType().toString(), getID(), getStaff(), getDate(), getQuantity(), getCost(), getCustomerID());
+        }
+
+        str += getInfo();
         return str;
     }
 
@@ -76,7 +89,8 @@ public class Receipt implements IPrintable, IWritable {
                      getQuantity() + " " +
                      getCost() + " " +
                      getInfo().replace(" ", "_") + " " +
-                     getType().toString() + 
+                     getType().toString() + " " +
+                     getCustomerID() +
                      "xDATASEPARATEx";
         
         return str;
@@ -91,5 +105,9 @@ public class Receipt implements IPrintable, IWritable {
         setCost(Integer.parseInt(str[4]));
         setInfo(str[5].replace("_", " "));
         setType(ReceiptType.valueOf(str[6]));
+
+        if (getType() == ReceiptType.Export) {
+            setCustomerID(str[7]);
+        }
     }
 }

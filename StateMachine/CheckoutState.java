@@ -21,7 +21,7 @@ public class CheckoutState implements State<Shop>
     /*Other methods*/
     @Override
     public void enter(Shop owner) {
-        System.out.print("\n=== Choose the option ===\n1. Add Product To Cart\n2. Remove Product From Cart\n3.View Cart\n4. Checkout\n5. Cancel\nInput: ");
+        System.out.print("\n=== Choose the option ===\n1. Add Product To Cart\n2. Remove Product From Cart\n3. View Cart\n4. Checkout\n5. Cancel\nInput: ");
     }
 
     @Override

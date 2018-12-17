@@ -32,9 +32,13 @@ public class EditCustomerState implements State<Shop>
         else if(owner.getCustomerList().findCustomer(input)!=-1)
         {
             System.out.print("\n=== Customer's infomation ===\n");
+            int isDone=1;
             System.out.print( owner.getCustomerList().getCustomer(input).toString());
             System.out.print("\n=== Choose the option ===\n1. First Name\n2. Last Name\n3. Year Of Birth\n4 .Address\n5. Phone Number\n6. Point\nInput: ");
-            switch( Shop.scanner.nextInt())
+            do
+            {
+                isDone=0;
+                switch( Shop.scanner.nextInt())
             {
                 case 1:
                 Shop.scanner.nextLine();
@@ -91,12 +95,13 @@ public class EditCustomerState implements State<Shop>
                 Shop.scanner.nextLine();
                 enter(owner);
                 break;
-                
-               
-            }
-        
-            
-           
+
+                default:
+                        System.out.print("Invalid option! Please input: ");
+                        isDone = 1;
+                        break;
+                }
+            } while(isDone==1);               
         }
         else
         {

@@ -62,6 +62,7 @@ public class Receipt implements IPrintable, IWritable {
     /*Other methods*/
     public void toInfo(Product product) {
         info += product.toString();
+        info += "Activation Code: " + product.getCode() + "\n";
         cost += product.getPrice();
         ++quantity;
     }

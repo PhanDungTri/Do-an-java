@@ -15,9 +15,9 @@ public class Staff implements IPrintable,IWritable {
     public Staff () {}
     public Staff (String id)
     {
+        isAdmin=false;
         setID (id) ;
         createStaffInfo();
-        isAdmin=false;
     }
 
     /*Set Methods*/

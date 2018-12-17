@@ -75,7 +75,7 @@ public class Receipt implements IPrintable, IWritable {
         }
         else {
             str = String.format("|%-8s|%-10s|%-20s|%-20s|%-5s|%-10s|%-10s|\n", "Action", "ID", "Staff", "Date", "Quan.", "Price", "Customer");
-            str += String.format("|%-8s|%-10s|%-20s|%-20s|%-5s|%-10s|\n\n", getType().toString(), getID(), getStaff(), getDate(), getQuantity(), getCost(), getCustomerID());
+            str += String.format("|%-8s|%-10s|%-20s|%-20s|%-5s|%-10s|%-10s|\n\n", getType().toString(), getID(), getStaff(), getDate(), getQuantity(), getCost(), getCustomerID());
         }
 
         str += getInfo();

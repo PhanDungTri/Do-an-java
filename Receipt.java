@@ -66,7 +66,6 @@ public class Receipt implements IPrintable, IWritable {
         cost += product.getPrice();
         ++quantity;
     }
-
     @Override
     public String toString() {
         String str = "";
